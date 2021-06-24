@@ -10,7 +10,6 @@ post.init({
     allowNull: false
   },
   
-
 }, {
   sequelize, 
   modelName: 'post' 
