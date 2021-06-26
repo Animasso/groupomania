@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 //package qui est utilisé pour la gestion et la transformation des chemins de ‎‎fichiers‎
-
+const path = require('path');
 const rateLimit = require("express-rate-limit");
 //met les valeurs de donnée importante dans un fichier .env pour les cacher
 require("dotenv").config();
@@ -20,6 +20,7 @@ const limiter = rateLimit({
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
+const app = express();
 
 app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
    next();
  });
-const app = express();
+
 
 app.use((req, res) => {
    res.json({ message: 'Votre requête a bien été reçue !' }); 
@@ -39,7 +40,7 @@ app.use(limiter);
 const db =require('./models')
 db.sequelize.sync()
 
-app.use('/api/auth', authRoutes);
+
 app.use('/api/users',auth , userRoutes); 
 app.use('/api/posts', auth, postRoutes); 
 app.use('/api/comments', auth, commentRoutes); 

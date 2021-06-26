@@ -1,9 +1,9 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory');
+const {  DataTypes, Model } = require('sequelize');
+const sequelize = require('../config/db.config').sequelize
 
-class post extends Model {}
 
-post.init({
+
+const Post = sequelize.define('Post',{
 
   content: {
     type: DataTypes.STRING,
@@ -15,4 +15,4 @@ post.init({
   modelName: 'post' 
 });
 
-console.log(post === sequelize.models.post); 
+console.log(Post === sequelize.models.Post); 

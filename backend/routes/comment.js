@@ -10,10 +10,10 @@ const multer = require('../middleware/multer');
 router.post('/:postId/comment', auth,commentCtrl.createComment);
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/:postId/comment/:id', auth,commentCtrl.FindOneComment);
+//router.get('/:postId/comment/:id', auth,commentCtrl.FindOneComment);
 
 //requete pour modifier un objet existant
-router.put('/:postId/comment/:id', auth,commentCtrl.modifyComment );
+//router.put('/:postId/comment/:id', auth,commentCtrl.modifyComment );
 
 //requete pour supprimer un objet existant
 router.delete('/:postId/comment/:id', auth,commentCtrl.deleteComment );

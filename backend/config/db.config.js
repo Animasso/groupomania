@@ -18,4 +18,8 @@ const sequelize = new Sequelize('groupomania','root','Animasso1170', {
   }
   const db = {};
 
-db.Sequelize = Sequelize;
+  db.Sequelize = Sequelize;
+  db.sequelize = sequelize;
+
+
+module.exports = db;
