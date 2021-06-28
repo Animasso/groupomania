@@ -27,7 +27,7 @@ if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.passwo
       const user = new User({
         firstname: req.body.firstName,
         lastName:req.body.lastName,
-        email: emailCrypt,
+        email: emailCrypt, 
         password: hash
       });
       db.User.create(user)
