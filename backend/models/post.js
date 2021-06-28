@@ -1,10 +1,6 @@
-const {  DataTypes, Model } = require('sequelize');
-const sequelize = require('../config/db.config').sequelize
+const { DataTypes, Model } = require('sequelize');
 
-
-
-const Post = sequelize.define('Post',{
-
+module.exports = (sequelize, Sequelize) => sequelize.define("Post", {
   content: {
     type: DataTypes.STRING,
     allowNull: false
@@ -15,4 +11,7 @@ const Post = sequelize.define('Post',{
   modelName: 'post' 
 });
 
-console.log(Post === sequelize.models.Post); 
+
+
+
+

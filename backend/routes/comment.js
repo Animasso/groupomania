@@ -4,7 +4,6 @@ const router = express.Router();
 const commentCtrl=require('../controllers/comment');
 //const pour le token
 const auth = require('../middleware/auth');
-const multer = require('../middleware/multer');
 
 //requete pour poster un nouvel objet avec multer pour les images
 router.post('/:postId/comment', auth,commentCtrl.createComment);

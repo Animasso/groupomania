@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const cryptojs = require("crypto-js");
 const mailValidator = require('email-validator');
 var passwordValidator = require('password-validator');
-const db =require('../models/user')
+const db =require('../models/User')
 
 
 var schema = new passwordValidator();

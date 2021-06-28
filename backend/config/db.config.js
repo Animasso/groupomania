@@ -8,7 +8,6 @@ const sequelize = new Sequelize('groupomania','root','Animasso1170', {
       acquire: 30000,
       idle: 10000
     }
-    
   });
   try {
     sequelize.authenticate();

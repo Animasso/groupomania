@@ -1,10 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../config/db.config').sequelize;
 
-
-
-const User = sequelize.define('User',{
-
+module.exports = (sequelize, Sequelize) => sequelize.define("User", {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false
@@ -24,6 +20,6 @@ const User = sequelize.define('User',{
 }, {
   sequelize, 
   modelName: 'user' 
+  
 });
-
-console.log(User === sequelize.models.User); 
+ 

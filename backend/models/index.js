@@ -1,10 +1,27 @@
+const dbConfig = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
-const sequelize = require('../config/db.config')
+const sequelize = new Sequelize('groupomania','root','Animasso1170', {
+  host: 'localhost',
+  dialect: 'mysql',
+  logging: false,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
 
+const db = {};
 
-//db.users = require("./models/user.js")(sequelize, Sequelize);
-//db.posts = require("./models/post.js")(sequelize, Sequelize);
-//db.comments = require("./models/comment.js")(sequelize, Sequelize);
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-module.exports = sequelize;
+db.posts = require("./post.js")(sequelize, Sequelize);
+db.users = require("./user.js")(sequelize, Sequelize)
+db.comments = require("./comment.js")(sequelize, Sequelize)
+
+db.sequelize.sync();
+
+module.exports = db;
