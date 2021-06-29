@@ -17,4 +17,4 @@ router.post('/:postId/comment', auth,commentCtrl.createComment);
 //requete pour supprimer un objet existant
 router.delete('/:postId/comment/:id', auth,commentCtrl.deleteComment );
 
-module.exports = router;
+module.exports = router; 

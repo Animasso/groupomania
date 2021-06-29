@@ -1,5 +1,5 @@
 const fs = require('fs'); 
-const db =require('../models/post')
+const db =require('../models/index')
 
 
 exports.deletePost = (req, res, next) => {
@@ -8,7 +8,7 @@ exports.deletePost = (req, res, next) => {
             ({ where: { id: req.params.id }})
               .then(post => {
     //nous utilisons le fait de savoir que notre URL d'image contient un segment /images/ pour séparer le nom de fichier ;
-                const filename = sauce.imageUrl.split('/images/')[1];
+                const filename = post.imageUrl.split('/images/')[1];
     // nous utilisons ensuite la fonction unlink du package fs pour supprimer ce fichier, en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé ;
                 fs.unlink(`images/${filename}`, () => {
                   post.deleteOne({post_id: req.params.id })

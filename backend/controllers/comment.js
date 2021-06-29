@@ -1,4 +1,5 @@
-const db =require('../models/post')
+const db =require('../models/index');
+const comment =require('../models/comment');
 
 exports.deleteComment = (req, res, next) => {
     db.comment.findOne({ where: { id: req.params.id } })
