@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const cryptojs = require("crypto-js");
 const mailValidator = require('email-validator');
 var passwordValidator = require('password-validator');
-const db =require('../models/user')
+const models =require('../models/index.js')
 
 
 var schema = new passwordValidator();
@@ -68,24 +68,27 @@ const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toStrin
 
 
 exports.deleteUser = (req, res, next) => {
-    db.User.findOne({ where: { id: req.params.id }})  
-      .then((user) => {
-          db.User.destroy({ where: { id: req.params.id }}) 
-                    .then(() => res.status(200).json({ message: 'Compte supprimé' }))
+    models.User.findOne({ where: { id: req.params.id }})  
+      .then(() => {
+          models.User.destroy({ where: { id: req.params.id }}) 
+                    .then((user) => res.status(200).json(user)
+                    ({ message: 'Compte supprimé' }))
                     .catch(error => res.status(400).json({ error }));
                 })
             .catch (error => res.status(500).json({ error }));
 };
 
 exports.getOneUser = (req, res, next) => {
-    db.User.findOne({ where: { id: req.params.id }})
+    models.User.findOne
+    ({ where: { id: req.params.id }})
         .then((user) => res.status(200).json(user))
         .catch(error => res.status(404).json({ error }));
 };
 
 exports.getAllUsers = (req, res, next) => {
-    db.User.findAll() 
+    models.User.findAll() 
         .then((users) => res.status(200).json(users))
         console.log(users)
         .catch(error => res.status(400).json({ error }));
 };
+

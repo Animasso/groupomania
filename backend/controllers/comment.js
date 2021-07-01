@@ -1,11 +1,12 @@
-const db =require('../models/index');
-const comment =require('../models/comment');
+const models =require('../models/index.js');
+
 
 exports.deleteComment = (req, res, next) => {
-    db.comment.findOne({ where: { id: req.params.id } })
+    models.Comment.findOne({ where: { id: req.params.id } })
         .then((comment) => {
-            db.comment.destroy({ where: { id: req.params.id } })
-                .then(() => res.status(200).json({ message: 'commentaire supprimée' }))
+            models.Comment.destroy({ where: { id: req.params.id } })
+                .then(() => res.status(200).json(comment)
+                ({ message: 'commentaire supprimée' }))
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
