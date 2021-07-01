@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const cryptojs = require("crypto-js");
 const mailValidator = require('email-validator');
 var passwordValidator = require('password-validator');
-const db =require('../models/index')
+const db =require('../models/user')
 
 
 var schema = new passwordValidator();
@@ -84,7 +84,7 @@ exports.getOneUser = (req, res, next) => {
 };
 
 exports.getAllUsers = (req, res, next) => {
-    db.User.findAll()
+    db.User.findAll() 
         .then((users) => res.status(200).json(users))
         console.log(users)
         .catch(error => res.status(400).json({ error }));

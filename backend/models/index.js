@@ -15,6 +15,7 @@ const sequelize = new Sequelize('groupomania','root','Animasso1170', {
 
 const db = {};
 
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 

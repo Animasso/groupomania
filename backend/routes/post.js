@@ -13,7 +13,7 @@ router.get('/posts', auth,postCtrl.getAllPosts);
 router.post('/post', auth,multer,postCtrl.createPost);
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/post/:id', auth,postCtrl.getOnePost);
+router.get('/post/:id', auth,postCtrl.findOnePost);
 
 //requete pour modifier un objet existant
 router.put('/post/:id', auth,multer,postCtrl.modifyPost );
