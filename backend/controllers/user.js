@@ -30,7 +30,7 @@ if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.passwo
         email: emailCrypt, 
         password: hash
       });
-      db.User.create(user)
+      models.User.create(user)
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
         .catch(error => res.status(400).json({ error }));
     })
@@ -41,7 +41,7 @@ if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.passwo
 exports.login = (req, res, next) => {
 const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toString();
 
-    db.User.findOne({
+    models.User.findOne({
         where:{email: emailCrypt}  
     })
     .then(user => {
