@@ -1,12 +1,12 @@
 const { DataTypes, Model } = require('sequelize');
-module.exports = (sequelize, Sequelize) => sequelize.define("Comment", {
+module.exports = (sequelize, Sequelize) => sequelize.define("comment", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey : true,
     autoIncrement :true
   },
-  fk_postId: {
+  post_id: {
     type: DataTypes.INTEGER,
     allowNull: false
   },

@@ -1,13 +1,13 @@
 const { DataTypes, Model } = require('sequelize');
 
-module.exports = (sequelize, Sequelize) => sequelize.define("Post", {
+module.exports = (sequelize, Sequelize) => sequelize.define("post", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey : true,
     autoIncrement :true
   },
-  fk_userId: {
+  user_id: {
     type: DataTypes.INTEGER,
     allowNull: false
   },

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 // middleware d authentification pour securiser les routes avec un token
 module.exports = (req, res, next) => {
-  try {
+  /*try {
     //on utilise split pour récupérer tout après l'espace dans le header
     const token = req.headers.authorization.split(' ')[1];
     //nous utilisons ensuite la fonction verify pour décoder notre token. Si celui-ci n'est pas valide, une erreur sera générée ;
@@ -18,5 +18,6 @@ module.exports = (req, res, next) => {
     res.status(401).json({
       error: new Error('Invalid request!')
     });
-  }
+  }*/
+  next();
 };
