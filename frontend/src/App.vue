@@ -1,12 +1,19 @@
 <template>
-  
+<div>
+  <router-link to ='/'></router-link>
+  <router-view />
+</div>
 </template>
 
 <script>
-
-
-export default {
  
+export default {
+  components: {
+  },
+ name: "App",
+  data() {
+    return {};
+  },
 }
 </script>
 
