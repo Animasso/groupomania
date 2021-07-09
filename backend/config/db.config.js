@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('groupomania','root','Animasso1170', {
     host: 'localhost',
-    dialect: 'mysql', 
+    dialect: 'mysql',
     pool: {
       max: 5,
       min: 0,

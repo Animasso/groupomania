@@ -6,10 +6,7 @@ module.exports = (sequelize, Sequelize) => sequelize.define("comment", {
     primaryKey : true,
     autoIncrement :true
   },
-  post_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
+  
   comment: {
     type: DataTypes.STRING,
     allowNull: false

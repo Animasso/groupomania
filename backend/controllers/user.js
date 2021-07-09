@@ -1,51 +1,41 @@
 const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const cryptojs = require("crypto-js");
 const mailValidator = require('email-validator');
 var passwordValidator = require('password-validator');
 const models =require('../models/index.js')
 
-
 var schema = new passwordValidator();
-schema
-.is().min(8)                                    
-.is().max(100)                                  
-.has().uppercase()                              
-.has().lowercase()                              
-.has().digits(2)                                
-.has().not().spaces()                           
-.is().not().oneOf(['Passw0rd', 'Password123']); 
+  schema
+  .is().min(8)                                    
+  .is().max(100)                                  
+  .has().uppercase()                              
+  .has().lowercase()                              
+  .has().digits(2)                                
+  .has().not().spaces()                           
+  .is().not().oneOf(['Passw0rd', 'Password123']); 
+
  
-exports.signup = (req, res, next) => {
-const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toString();
-if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.password))) {  
-  throw { error: " invalide !" }  
-} else if (mailValidator.validate(req.body.email) && (schema.validate(req.body.password)))
+  exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
-
-    .then(hash => {
-      const user = new User({
-        firstname: req.body.firstName,
-        lastName:req.body.lastName,
-        email: emailCrypt, 
-        password: hash
-      });
-      models.users.create(user)
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(500).json({ error }));  
-
-};
-
+        .then(hash => {
+            models.users.create({
+                firstName : req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: hash,
+            })
+            .then((users) => res.status(201).json({message: 'Utilisateur crée !'}))
+            .catch(error => res.status(400).json({error}));
+        })
+        .catch(error => res.status(500).json({error}));
+}
 exports.login = (req, res, next) => {
-const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toString();
 
     models.users.findOne({
-        where:{email: emailCrypt}  
+      where: { email: req.body.email }    
     })
-    .then(user => {
-      if (!user) {
+    .then(users => {
+      if (!users) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
       bcrypt.compare(req.body.password, user.password)
@@ -54,9 +44,9 @@ const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toStrin
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
           res.status(200).json({
-            userId: user.id, 
+            userId: users.id, 
             token: jwt.sign(
-                { userId: user.id },
+                { userId: users.id },
                 'RANDOM_TOKEN_SECRET',
                 { expiresIn: '24h' }
               ) 
@@ -70,7 +60,7 @@ const emailCrypt = cryptojs.HmacSHA256(req.body.email, 'secret key 123').toStrin
 exports.deleteUser = (req, res, next) => {
     models.users.findOne({ where: { id: req.params.id }})  
       .then(() => {
-          models.User.destroy({ where: { id: req.params.id }}) 
+          models.users.destroy({ where: { id: req.params.id }}) 
                     .then((user) => res.status(200).json(user)
                     ({ message: 'Compte supprimé' }))
                     .catch(error => res.status(400).json({ error }));
@@ -86,9 +76,9 @@ exports.getOneUser = (req, res, next) => {
 };
 
 exports.getAllUsers = (req, res, next) => {
-    models.users.findAll() 
+    models.users.findAll({attributes: ['id', 'email','firstName','lastName']}) 
         .then((users) => res.status(200).json(users))
-        console.log(users)
         .catch(error => res.status(400).json({ error }));
 };
 
+ 

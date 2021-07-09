@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 
-module.exports = (sequelize, Sequelize) => sequelize.define("users", {
+module.exports = (sequelize, Sequelize) => sequelize.define("user", {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false
@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => sequelize.define("users", {
   }
 }, {
   sequelize, 
-  modelName: 'users' 
+  modelName: 'user' 
   
 });
  

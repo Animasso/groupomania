@@ -4,11 +4,11 @@ const models=require('../models/index.js')
 
 exports.deletePost = (req, res, next) => {
     // nous utilisons l'ID que nous recevons comme paramètre pour accéder au post correspondant dans la base de données 
-            models.Post.findOne 
+            models.posts.findOne 
             ({ where: { id: req.params.id }})
               .then(post => {
     //nous utilisons le fait de savoir que notre URL d'image contient un segment /images/ pour séparer le nom de fichier ;
-                const filename = post.imageUrl.split('/images/')[1];
+                const filename = posts.imageUrl.split('/images/')[1];
     // nous utilisons ensuite la fonction unlink du package fs pour supprimer ce fichier, en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé ;
                 fs.unlink(`images/${filename}`, () => {
                   post.destroy({post_id: req.params.id })
@@ -21,7 +21,7 @@ exports.deletePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
 if (!req.file) {
-    models.Post.create({
+    models.posts.create({
         ...req.body,
         UserId: userId,
         imageUrl: "",
@@ -30,7 +30,7 @@ if (!req.file) {
         .catch((error) => res.status(500).json(error));
 
     } else if (req.file) {
-        models.Post.create({
+        models.posts.create({
             ...req.body,
             UserId: userId,
             imageUrl: `${req.protocol}://${req.get("host")}/images/${
@@ -44,12 +44,12 @@ if (!req.file) {
 exports.modifyPost = async (req, res) => {
 
   try {
-      await models.Post.findOne({
+      await models.posts.findOne({
           where: {
               id: (req.params.id)
           }
       });
-      await models.Post.update({
+      await models.posts.update({
           content: req.body.content,
           image: req.body.image
       }, {
@@ -68,33 +68,16 @@ exports.modifyPost = async (req, res) => {
 
 exports.findOnePost= (req, res, next) => {
 
-  models.Post.findOne({
-          where: {
-              id: req.params.id
-          },
-          include: {
-              model: models.User,
-              attributes: ['firstname','lastname']
-          }
-      })
-      .then(post => {
-          res.status(200).json(post);
-      })
-      .catch(error => res.status(400).json({
-          error
-      }));
+  models.posts.findOne({
+     where: { id: req.params.id }})
+    .then((post) => res.status(200).json(post))
+    .catch(error => res.status(404).json({ error }));
 };
+     
+
 
 exports.getAllPosts = (req, res, next) => {
-
-  models.Post.findAll({
-          include: {
-              model: models.post,
-              attributes: ['firstname','lastname']
-          }
-      })
-      .then(posts => res.status(200).json(posts))
-      .catch(error => res.status(400).json({
-          error: error
-      }));
+    models.posts.findAll({attributes: ['id','content','image']}) 
+        .then((posts) => res.status(200).json(posts))
+        .catch(error => res.status(400).json({ error }));
 };

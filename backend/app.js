@@ -23,7 +23,7 @@ const commentRoutes = require('./routes/comment');
 const app = express();
 
 
-app.use('/api/', userRoutes); 
+app.use('/api/users', userRoutes); 
 app.use('/api/posts', auth, postRoutes); 
 app.use('/api/comments', auth, commentRoutes); 
 app.use('/images', express.static(path.join(__dirname, 'images')));
