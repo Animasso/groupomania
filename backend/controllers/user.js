@@ -2,7 +2,8 @@ const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mailValidator = require('email-validator');
 var passwordValidator = require('password-validator');
-const models =require('../models/index.js')
+const models =require('../models/index.js');
+const { users } = require('../models/index.js');
 
 var schema = new passwordValidator();
   schema
@@ -16,6 +17,7 @@ var schema = new passwordValidator();
 
  
   exports.signup = (req, res, next) => {
+    console.log(req)
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             models.users.create({
@@ -24,7 +26,8 @@ var schema = new passwordValidator();
                 email: req.body.email,
                 password: hash,
             })
-            .then((users) => res.status(201).json({message: 'Utilisateur crée !'}))
+            users.save()
+            .then(() => res.status(201).json({message: 'Utilisateur crée !'}))
             .catch(error => res.status(400).json({error}));
         })
         .catch(error => res.status(500).json({error}));

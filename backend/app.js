@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 /*app.use(helmet());
 app.use(limiter);
