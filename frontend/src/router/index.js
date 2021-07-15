@@ -1,15 +1,12 @@
-import Vue from 'vue'
+
 import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-import signin from '../views/signin.vue'
-
+ 
 const routes = [
     
     {
       path: '/',
       name: 'signin',
-      component: signin
+      component: () => import('../views/signin.vue')
     },
     
     { 
@@ -21,6 +18,11 @@ const routes = [
       path: '/profil',
       name: 'profil',
       component: () => import('../views/profil.vue')
+    },
+    {
+      path: '/perso',
+      name: 'perso',
+      component: () => import('../views/perso.vue')
     }
   ]
   
@@ -28,5 +30,5 @@ const routes = [
     routes
   })
   
-  export default router
+  export default router; 
   

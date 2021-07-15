@@ -1,20 +1,25 @@
-<template>
+<template> 
+
     <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 d-flex justify-content-center">
-                    <img src="/images/icon-title.png" class="w-40 img-fluide" alt="titre">
+                    <img src="../assets/icon-title.png" class="w-40 img-fluide" alt="titre">
                 </div>
             </div>
     
             <fieldset>
+                 <div class="d-flex flex-column justify-content-center">
+                     <div class="connect">
                 <h1 class="card__title" v-if="mode == 'login'">Connexion</h1>
-                <h1 class="card__title" v-else>Inscription</h1>
-
-                <p class="card__subtitle" v-if="mode == 'login'">Tu n'as pas encore de compte ? <span class="card__action" @click="switchToCreateAccount()">Créer un compte</span></p>
-                <p class="card__subtitle" v-else>Tu as déjà un compte ? <span class="card__action" @click="switchToLogin()">Se connecter</span></p>
-                
-                <div class="row d-flex align-items-center flex-column">
-                
+                <h1 class="card__title" v-else>Inscription</h1><br/>
+                </div><br/>
+                    
+                <p class="card__subtitle" v-if="mode == 'login'">Tu n'as pas encore de compte ?  <span class="card__action" @click="switchToCreateAccount()"> Créer un compte</span></p>
+                <p class="card__subtitle" v-else>Tu as déjà un compte ?  <span class="card__action" @click="switchToLogin()"> Se connecter</span></p>
+                    </div>
+                 
+                 
+                <div class="row-8 d-flex align-items-center flex-column">
                 <div class="form-floating justify-content-center">
                     <input v-model="firstName" type="text" class="form-control" v-if="mode == 'create'" id="floatingName" placeholder="Nom">
                     <label for="floatingName">Nom</label>
@@ -34,17 +39,21 @@
                     <label for="floatingPassword">Mot de passe</label>
                 </div>
 
-                <button type="button" class=" btn btn-primary w-auto justify-content-center" v-if="mode == 'login'">Se connecter</button>
-                <button type="button" class=" btn btn-primary w-auto justify-content-center" v-else>Inscription</button>
+                <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userLogin()" v-if="mode == 'login'">Se connecter</button>
+                <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userRegister()" v-else>Inscription</button>
             </div>
+            
             </fieldset>
     </div>
     
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'Login',
+  
+  name: 'signin',
   data: function () {
     return {
       mode: 'login',
@@ -52,7 +61,6 @@ export default {
       lastName: '',
       email: '',
       password: '',
-      
     }
   },
   methods:{
@@ -62,11 +70,97 @@ export default {
     switchToLogin: function () {
       this.mode = 'login';
     },
+    userLogin() {
+      if (this.email == "" || this.password == "") {
+        alert(
+          "Veuillez entrer votre email et votre mot de passe pour vous connecter"
+        );
+      } 
+      else {
+        axios
+          .post(
+            "http://localhost:3000/api/users/login",
+            {
+              email: this.email,
+              password: this.password,
+            }, 
+          )
+          .then((response) => {
+            response.headers = {
+              Authorization: "Bearer " + response.data.token,
+            };
+           this.router.push({name: "perso"})
+          })
+          .catch(() => {
+              {
+                  this.message ="utilisateur non trouvé"
+              }
+          })
+      }
+    },
+     userRegister(){
+      if (this.firstName == "" || this.password == "" || this.email == "" || this.lastName == "" ) {
+        alert(
+          "Veuillez remplir tous les champs"
+        );
+      } 
+      else {
+        axios
+          .post(
+            "http://localhost:3000/api/users/signup",
+            {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              email: this.email,
+              password: this.password,
+            }, 
+          )
+          .then((response) => {
+            response.headers = {
+              Authorization: "Bearer " + response.data.token,
+            }
+             this.router.push({name: "perso"})
+          })
+          .catch(() => {
+              {
+                  this.message ="utilisateur non trouvé"
+              }
+          })
+      }
+          
+    }    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-</style>
+h1{
+    font-size: larger;
+}
+ .form-floating{
+        width: 300px;
+    }
+    .btn{
+         margin-top: 10px; 
+    }
+    img{
+        width: 300px;
+    }
+    .connect{
+        display: flex;
+        justify-content: center;
+    }
+    .card__subtitle{
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+    }
+    fieldset{
+        
+        margin-bottom: 100px;
+    }
+    .form-control{
+        margin-top: 10px;
+    }
+</style> 
