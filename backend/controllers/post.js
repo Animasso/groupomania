@@ -50,8 +50,7 @@ exports.modifyPost = async (req, res) => {
           }
       });
       await models.posts.update({
-          content: req.body.content,
-          image: req.body.image
+          content: req.body.content
       }, {
           where: {
               id: (req.params.id)

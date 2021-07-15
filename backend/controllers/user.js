@@ -26,7 +26,6 @@ var schema = new passwordValidator();
                 email: req.body.email,
                 password: hash,
             })
-            users.save()
             .then(() => res.status(201).json({message: 'Utilisateur crée !'}))
             .catch(error => res.status(400).json({error}));
         })
@@ -41,7 +40,7 @@ exports.login = (req, res, next) => {
       if (!users) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
-      bcrypt.compare(req.body.password, user.password)
+      bcrypt.compare(req.body.password, users.password)
         .then(valid => {
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
@@ -84,4 +83,12 @@ exports.getAllUsers = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
- 
+ exports.updateUser = (req, res, next) => {
+    bcrypt.hash(req.body.password, 10)
+        .then(hash => {
+            models.users.update, [req.body.firstName,req.body.lastName, req.body.email, hash, req.params.id], (error, result) => {
+                res.status(201).json({message: 'Utilisateur modifier'})
+              .catch(error => res.status(400).json({ error }));  
+            }
+        })
+};
