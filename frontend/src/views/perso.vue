@@ -47,13 +47,14 @@ export default {
   data(){
       return{
           posts:[],
-          content:''
+          content:'',
+          comments:[]
      }
   },
   methods :{
-      findOnePost(){
+      findPostCom(){
           axios
-          .get("http://localhost:3000/api/posts/:id",
+          .get("http://localhost:3000/api/posts/:id/comments",
           {
               headers:{
                   'Content-Type': 'application.json',

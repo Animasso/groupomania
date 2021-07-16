@@ -70,7 +70,7 @@ export default {
     switchToLogin: function () {
       this.mode = 'login';
     },
-    userLogin() {
+    userLogin: function () {
       if (this.email == "" || this.password == "") {
         alert(
           "Veuillez entrer votre email et votre mot de passe pour vous connecter"
@@ -89,7 +89,8 @@ export default {
             response.headers = {
               Authorization: "Bearer " + response.data.token,
             };
-           this.router.push({name: "perso"})
+            console.log(this.$router);
+           this.$router.push("perso")
           })
           .catch(() => {
               {

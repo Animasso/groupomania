@@ -1,6 +1,6 @@
 
 import VueRouter from 'vue-router'
- 
+import Perso from'../views/perso.vue'
 const routes = [
     
     {
@@ -22,7 +22,7 @@ const routes = [
     {
       path: '/perso',
       name: 'perso',
-      component: () => import('../views/perso.vue')
+      component: Perso
     }
   ]
   

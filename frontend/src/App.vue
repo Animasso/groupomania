@@ -1,18 +1,18 @@
 <template>
-<div id="app">
-  <signin />
+
+<router-view></router-view>
   
    
-</div>
+
 </template>
 
 <script>
-import signin from './views/signin.vue'
+
 
 export default {
   name: "App",
   components: {
-    signin
+    
   },
  
   
