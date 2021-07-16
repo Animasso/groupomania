@@ -1,8 +1,6 @@
+import { createWebHistory, createRouter } from "vue-router";
 
-import VueRouter from 'vue-router'
-import Perso from'../views/perso.vue'
 const routes = [
-    
     {
       path: '/',
       name: 'signin',
@@ -22,13 +20,13 @@ const routes = [
     {
       path: '/perso',
       name: 'perso',
-      component: Perso
+      component: () => import('../views/perso.vue')
     }
-  ]
-  
-  const router = new VueRouter({
+]
+
+const router = createRouter({
+    history: createWebHistory(),
     routes
-  })
-  
-  export default router; 
-  
+})
+
+export default router
