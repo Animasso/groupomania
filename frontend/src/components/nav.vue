@@ -17,10 +17,10 @@
                   <a class="nav-link" @click="logout()">Déconnection</a>
                 </li>
               </ul>
-              <router-view/>
+             
             </div>
           </nav>
-
+         <router-view/>
 </template>
 
 
@@ -29,14 +29,11 @@
 <script>
 export default {
         name: 'nav',
-        data() {
-            return {
-                
-            }
-        },
+       
+        
         methods:{
             logout(){
-                localStorage.clear();
+                sessionStorage.clear();
                 this.$router.push('/signin')
             }
            
@@ -48,11 +45,10 @@ export default {
 
 <style scoped>
 
-.navbar-brand{
-    img{
+.navbar-brand img{
         width: 100px;
     }
-}
+
 .nav-item{
     font-size: large;
     font-weight: bolder;

@@ -1,8 +1,9 @@
 <template>
+<nav />
    <div class ="container">
-     <nav />
       <div class="container pb-cmnt-container">
       <h1>Bienvenue sur ton espace {{user.firstName}} {{user.lastName}} </h1>
+      
             <div class="row">
                 <div class="col-md-9 col-md-offset-3">
                     <div class="panel panel-info">
@@ -64,6 +65,7 @@ export default {
           )
           .then(response=>{
               this.posts=response.data;
+            
           })
       }
   }

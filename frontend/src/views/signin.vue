@@ -86,9 +86,10 @@ export default {
             }, 
           )
           .then((response) => {
-            response.headers = {
-              Authorization: "Bearer " + response.data.token,
-            };
+            let responseUser = response.data.userId;
+            let responseToken = response.data.token;
+            sessionStorage.setItem('user', JSON.stringify(responseUser)); //push de l'id dans la sessionStorage
+            sessionStorage.setItem('token', responseToken);
             console.log(this.$router);
            this.$router.push("perso")
           })
@@ -117,10 +118,11 @@ export default {
             }, 
           )
           .then((response) => {
-            response.headers = {
-              Authorization: "Bearer " + response.data.token,
-            }
-             this.router.push({name: "perso"})
+           let responseUser = response.data.userId;
+            let responseToken = response.data.token;
+            sessionStorage.setItem('user', JSON.stringify(responseUser)); //push de l'id dans la sessionStorage
+            sessionStorage.setItem('token', responseToken);
+             this.$router.push("perso") 
           })
           .catch(() => {
               {
