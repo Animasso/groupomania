@@ -12,18 +12,24 @@ CREATE TABLE `users` (
 
 CREATE TABLE `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `user_Id` int NOT NULL,
   `content` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_Id_idx` (`user_Id`),
+  CONSTRAINT `user_Id` FOREIGN KEY (`user_Id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `post_Id` int NOT NULL,
   `comment` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `post_Id_idx` (`post_Id`),
+  CONSTRAINT `post_Id` FOREIGN KEY (`post_Id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
