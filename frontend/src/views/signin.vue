@@ -42,7 +42,6 @@
                 <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userLogin()" v-if="mode == 'login'">Se connecter</button>
                 <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userRegister()" v-else>Inscription</button>
             </div>
-            
             </fieldset>
     </div>
     
@@ -118,14 +117,15 @@ export default {
             }, 
           )
           .then((response) => {
-           let responseUser = response.data.userId;
+            let responseUser = response.data.userId;
             let responseToken = response.data.token;
             sessionStorage.setItem('user', JSON.stringify(responseUser)); //push de l'id dans la sessionStorage
             sessionStorage.setItem('token', responseToken);
-             this.$router.push("perso") 
+            this.$router.push("perso")
+
           })
           .catch(() => {
-              {
+              { 
                   this.message ="utilisateur non trouvé"
               }
           })
