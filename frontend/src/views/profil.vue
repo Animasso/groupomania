@@ -18,10 +18,10 @@
                 <div class="password">
                   <p class="heading">Changer mon email</p>
                   <input v-model="email" type="email" class="changePassword" id="change" placeholder="nouveau email">
-                  <div class="third mt-4"> <button class="btn btn-success btn-block"> Modifier</button></div>
+                  <div class="third mt-4"> <button class="btn btn-success btn-block" type="submit"> Modifier</button></div>
                 </div>
                 <hr class="line-color">
-                <div class="third mt-4"> <button class="btn btn-success btn-block"><i class="fas fa-trash"></i> Supprimer le compte</button>
+                <div class="third mt-4"> <button class="btn btn-success btn-block" type="submit"><i class="fas fa-trash"></i> Supprimer le compte</button>
                 </div>
             </div>
         </div>
