@@ -23,7 +23,6 @@ exports.createPost = (req, res, next) => {
 if (!req.file) {
     models.posts.create({
         ...req.body,
-        UserId: userId,
         imageUrl: "",
     })
         .then((post) => res.status(201).json({post}))
@@ -41,15 +40,15 @@ if (!req.file) {
             .catch((error) => res.status(500).json(error));
     }
 };
-exports.modifyPost = async (req, res) => {
+exports.modifyPost = (req, res, next) => {
 
   try {
-      await models.posts.findOne({
+      models.posts.findOne({
           where: {
               id: (req.params.id)
           }
       });
-      await models.posts.update({
+      models.posts.update({
           content: req.body.content
       }, {
           where: {
@@ -73,10 +72,20 @@ exports.findOnePost= (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 };
      
-
-
 exports.getAllPosts = (req, res, next) => {
-    models.posts.findAll({attributes: ['id','content','image']}) 
-        .then((posts) => res.status(200).json(posts))
-        .catch(error => res.status(400).json({ error }));
-};
+    models.posts.findAll({
+        order:[[
+             'createdAt', 'DESC'
+        ]],
+         include:{
+             model:models.users,
+         }}).then(posts => {
+         res.status(200).json(posts);
+     }).catch(error => {
+         res.status(500).json({
+             message: 'probleme'
+         });
+     });
+    }
+
+

@@ -27,10 +27,14 @@ exports.getOneComment = (req, res, next) => {
     .catch(error => res.status(500).json((error)))
 }
 
-exports.getAllComments = (req, res, next) => {
+exports.findPostCom = (req, res, next) => {
     models.comments.findAll({
-        attributes:[ 'comment']
-    })
-    .then(comments => res.status(200).json(comments))
-    .catch(error => res.status(500).json((error)))
+        order:[[
+             'createdAt', 'DESC'
+        ]],
+        where: {
+            post_id:req.params.id
+        }
+    }).then(comments=>res.status(200).json(comments))
+    .catch(error=>res.status(400).json)({error:'probleme dans les commentaires'})
 }

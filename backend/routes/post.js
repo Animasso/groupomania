@@ -10,15 +10,16 @@ const multer = require('../middleware/multer');
 router.get('/',postCtrl.getAllPosts);
 
 //requete pour poster un nouvel objet avec multer pour les images
-router.post('/posts',multer,postCtrl.createPost);
+router.post('/post',postCtrl.createPost); 
 
 //requete pour ciblé et afficher un element grace a son id
 router.get('/:id',postCtrl.findOnePost);
+
 
 //requete pour modifier un objet existant
 router.put('/:id',multer,postCtrl.modifyPost );
 
 //requete pour supprimer un objet existant
-router.delete('/:id', auth,postCtrl.deletePost );
+router.delete('/:id',postCtrl.deletePost );
 
 module.exports = router;

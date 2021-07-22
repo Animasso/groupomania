@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => sequelize.define("post", {
     primaryKey : true,
     autoIncrement :true
   },
-  user_id: {
+  user_Id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => sequelize.define("post", {
  {
   sequelize, 
   modelName: 'post' 
-  
+ 
 });
 
 
