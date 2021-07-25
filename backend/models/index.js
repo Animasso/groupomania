@@ -23,6 +23,12 @@ db.posts = require("./post.js")(sequelize, Sequelize);
 db.users = require("./user.js")(sequelize, Sequelize)
 db.comments = require("./comment.js")(sequelize, Sequelize)
 
-db.sequelize.sync({ logging: console.log });
+db.users.hasMany(db.posts)
+db.posts.belongsTo(db.users)
+
+db.posts.hasMany(db.comments)
+db.comments.belongsTo(db.posts)
+
+db.sequelize.sync({ alter:true });
 
 module.exports = db;

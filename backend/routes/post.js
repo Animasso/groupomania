@@ -15,7 +15,6 @@ router.post('/post',postCtrl.createPost);
 //requete pour ciblé et afficher un element grace a son id
 router.get('/:id',postCtrl.findOnePost);
 
-
 //requete pour modifier un objet existant
 router.put('/:id',multer,postCtrl.modifyPost );
 

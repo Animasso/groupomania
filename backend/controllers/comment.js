@@ -13,8 +13,10 @@ exports.deleteComment = (req, res, next) => {
 };
 
 exports.createComment = (req, res, next) => {
+    const userId= sessionStorage.getItem('userId')
     const comment = {
-        userId: req.userId,
+        userId: userId,
+        postId: req.body.postId,
         comment: req.body.comment
     };
     models.comments.create(comment)
@@ -24,8 +26,8 @@ exports.createComment = (req, res, next) => {
 exports.getOneComment = (req, res, next) => {
     models.comments.findOne({ where: {id: req.params.id},attributes: ['comment']})
     .then(comments => res.status(200).json(comments))
-    .catch(error => res.status(500).json((error)))
-}
+    .catch(error => res.status(500).json(error))
+};
 
 exports.findPostCom = (req, res, next) => {
     models.comments.findAll({
@@ -33,8 +35,18 @@ exports.findPostCom = (req, res, next) => {
              'createdAt', 'DESC'
         ]],
         where: {
-            post_id:req.params.id
+            postId:req.params.id,
+        },
+        include:{
+            model:models.posts,
         }
-    }).then(comments=>res.status(200).json(comments))
-    .catch(error=>res.status(400).json)({error:'probleme dans les commentaires'})
-}
+    })
+        .then(comments => {return res.status(200).json(comments)})
+          .catch(error => {
+             return res.status(500).json({
+                 error
+              });
+          })
+    
+    
+};

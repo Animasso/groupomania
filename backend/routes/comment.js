@@ -15,6 +15,6 @@ router.get('/:id',commentCtrl.getOneComment);
 router.get('/:id/comments',commentCtrl.findPostCom);
 
 //requete pour supprimer un objet existant
-router.delete('/:id', auth,commentCtrl.deleteComment );
+router.delete('/:id',commentCtrl.deleteComment );
 
 module.exports = router; 
