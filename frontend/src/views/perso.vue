@@ -89,21 +89,16 @@ export default {
          .catch(err => console.log(err))
     },
 
-  
-  methods :{
+methods :{
 postMessage(){
         axios
-        .post("http://localhost:3000/api/posts/post",
-        
-        )
+        .post("http://localhost:3000/api/posts/post")
         .then(response=>{
             this.posts=response.data;
             this.$router.push("perso")
         })
-       
-    }
-  },
-  deletePost() {
+    },
+    deletePost() {
          axios
             .delete("http://localhost:3000/api/posts/:id" , {
                headers: {
@@ -114,6 +109,8 @@ postMessage(){
             .catch((err) => console.log(err));
             this.$router.push("perso")
       },
+  },
+  
 
 }
   

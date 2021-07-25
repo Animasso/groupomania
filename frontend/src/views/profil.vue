@@ -4,13 +4,13 @@
       <div class="container mt-5 d-flex justify-content-center">
             <div class="card p-4 mt-3">
                 <div class="first">
-                    <h6 class="heading">Animasso Sidibé</h6>
+                    <h6 class="heading">{{user.firstName}} {{user.lastName}} </h6>
                     <div class="time d-flex flex-row align-items-center justify-content-between mt-3">
                     </div>
                 </div>
                 <div class="second d-flex flex-row mt-2">
                     <div class="main">
-                        <div class="d-flex flex-row mb-1"> <span>asidibe017@gmail.com</span>
+                        <div class="d-flex flex-row mb-1"> <span>{{user.email}} </span>
                         </div>
                     </div>
                 </div> 
@@ -31,13 +31,32 @@
 
 <script>
 import navBar from '../components/navBar.vue'
-
+import axios from 'axios'
 export default {
   name:'profil',
   components:{
     navBar
-  }
+  },
+  data(){
+      return{
+          user:[],
+          firstName:'',
+          email: '',
+          lastName: '',
+     }
+  },
+   created(){
+     const userId= sessionStorage.getItem('user')
+        axios.get("http://localhost:3000/api/users/"+ userId , {
+            headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+         })
+         .then(response => console.log(response)
+          )
+         .catch((err) => console.log(err));
 }
+};
 </script>
 <style scoped>
 body {

@@ -1,5 +1,5 @@
 <template>
-<nav class="row-12 navbar navbar-expand-lg navbar-light mx-3 ">
+<nav class="row-12  navbar navbar-expand-lg navbar-light mx-3 ">
             <div class="navbar-brand"><img src="../assets/icon-title.png" alt="titre"></div>
             
             <div class="collapse navbar-collapse d-flex" id="navbarNav">
