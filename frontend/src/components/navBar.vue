@@ -1,5 +1,5 @@
 <template>
-<nav class="row-12  navbar navbar-expand-lg navbar-light mx-3 ">
+<nav class="row-12  navbar navbar-expand-lg navbar mx-3 ">
             <div class="navbar-brand"><img src="../assets/icon-title.png" alt="titre"></div>
             
             <div class="collapse navbar-collapse d-flex" id="navbarNav">
@@ -48,6 +48,9 @@ export default {
     font-size: large;
     font-weight: bolder;
     cursor: pointer;
+    
 }
-
+.nav-link{
+  color: rgb(12, 12, 161);
+}
 </style>

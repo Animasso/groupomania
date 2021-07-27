@@ -70,14 +70,16 @@ export default {
      }
   },
    created(){
-        axios.get("http://localhost:3000/api/users/:id", {
+        const userId= sessionStorage.getItem('user')
+        axios.get("http://localhost:3000/api/users/"+ userId , {
             headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
          })
-         .then(response => 
-          (this.user = response.data.user))
+         .then((response)=> 
+         (this.user = response.data))
          .catch((err) => console.log(err));
+
 
          axios.get("http://localhost:3000/api/posts", {
             headers: {

@@ -39,22 +39,19 @@ export default {
   },
   data(){
       return{
-          user:[],
-          firstName:'',
-          email: '',
-          lastName: '',
+          user:"",
      }
   },
-   created(){
-     const userId= sessionStorage.getItem('user')
-        axios.get("http://localhost:3000/api/users/"+ userId , {
-            headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-         })
-         .then(response => console.log(response)
-          )
-         .catch((err) => console.log(err));
+created(){
+const userId= sessionStorage.getItem('user')
+  axios.get("http://localhost:3000/api/users/"+ userId , {
+      headers: {
+          Authorization: "Bearer " + sessionStorage.token,
+      },
+    })
+    .then((response)=> 
+    (this.user = response.data))
+    .catch((err) => console.log(err));
 }
 };
 </script>
@@ -74,7 +71,7 @@ body {
 .btn {
     border-radius: 15px !important;
     color: black;
-    background-color: rgb(224, 17, 17);
+    background-color:  rgb(139, 139, 146);
 }
 .line-color {
     color: rgb(224, 17, 17);
