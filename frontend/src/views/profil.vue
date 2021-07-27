@@ -18,10 +18,10 @@
                 <div class="password">
                   <p class="heading">Changer mon email</p>
                   <input v-model="email" type="email" class="changePassword" id="change" placeholder="nouveau email">
-                  <div class="third mt-4"> <button class="btn btn-success btn-block" type="submit"> Modifier</button></div>
+                  <div class="third mt-4"> <button class="btn btn-success btn-block" @click.prevent="modifyProfil(user)"> Modifier</button></div>
                 </div>
                 <hr class="line-color">
-                <div class="third mt-4"> <button class="btn btn-success btn-block" type="submit"><i class="fas fa-trash"></i> Supprimer le compte</button>
+                <div class="third mt-4"> <button class="btn btn-success btn-block" @click.prevent="deleteUser()"><i class="fas fa-trash"></i> Supprimer le compte</button>
                 </div>
             </div>
         </div>
@@ -40,6 +40,7 @@ export default {
   data(){
       return{
           user:"",
+          email:"",
      }
   },
 created(){
@@ -52,8 +53,34 @@ const userId= sessionStorage.getItem('user')
     .then((response)=> 
     (this.user = response.data))
     .catch((err) => console.log(err));
+},
+methods:{
+  modifyProfil(user){
+   
+    axios.put('http://localhost:3000/api/users/'+ user.id,{
+     email: user.email},
+      {headers: {
+                Authorization: "Bearer " + localStorage.token,
+            },
+      })
+    .then((response)=> console.log(response))
+    .catch((err)=> console.log(err))
+  },
+   deleteUser() {
+              const userId= sessionStorage.getItem('user')
+               axios.delete("http://localhost:3000/api/users/" + userId, {
+                    headers: { Authorization: "Bearer " + localStorage.token },
+               })
+                    .then((response) => console.log(response))
+                    .catch((err) => console.log(err));
+                    sessionStorage.clear();
+                    this.$router.push("/")
+              
+          },
 }
 };
+
+
 </script>
 <style scoped>
 body {
