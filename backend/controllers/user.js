@@ -102,8 +102,8 @@ exports.updateUser = (req, res, next) => {
         },
      }
   )
-     .then((user) =>
-        res.status(201).json({ message: "updated with succés !" })
+     .then((users) =>
+        res.status(201).json({ message: "modif effectuée !" })
      )
      .catch((error) => res.status(500).json(error))
     };

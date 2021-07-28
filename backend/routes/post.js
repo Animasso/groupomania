@@ -13,12 +13,15 @@ router.get('/',postCtrl.getAllPosts);
 router.post('/post',postCtrl.createPost); 
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/:id',postCtrl.findOnePost);
+router.get('/:id',postCtrl.findAllPostUser);
 
 //requete pour modifier un objet existant
 router.put('/:id',multer,postCtrl.modifyPost );
 
 //requete pour supprimer un objet existant
 router.delete('/:id',postCtrl.deletePost );
+//requete pour recuperer tous les commentaire de chaque post
+router.get('/:id/comments',postCtrl.findPostCom);
+
 
 module.exports = router;

@@ -12,7 +12,6 @@ router.post('/',commentCtrl.createComment);
 router.get('/:id',commentCtrl.getOneComment);
 
 //requete pour les commentaire
-router.get('/:id/comments',commentCtrl.findPostCom);
 
 //requete pour supprimer un objet existant
 router.delete('/:id',commentCtrl.deleteComment );
