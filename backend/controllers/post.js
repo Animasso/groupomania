@@ -88,26 +88,6 @@ exports.getAllPosts = (req, res, next) => {
      });
     };
 
-    exports.findPostCom = (req, res, next) => {
-        models.comments.findAll({
-            order:[[
-                 'createdAt', 'DESC'
-            ]],
-            where: {
-                postId:req.params.id,
-            },
-            include:{
-                model:models.posts
-            }
-        })
-            .then(comments => {return res.status(200).json(comments)})
-              .catch(error => {
-                 return res.status(500).json({
-                     error
-                  });
-              })
-         
-        
-    };
+    
 
 

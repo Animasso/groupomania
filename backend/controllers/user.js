@@ -27,6 +27,7 @@ var schema = new passwordValidator();
                 password: hash,
             })
             .then((users) => res.status(200).json({
+              admin: users.admin,
               userId: users.id, 
               token: jwt.sign(
                   { userId: users.id },
@@ -53,6 +54,7 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
           res.status(200).json({
+            admin: users.admin,
             userId: users.id, 
             token: jwt.sign(
                 { userId: users.id },
@@ -107,3 +109,25 @@ exports.updateUser = (req, res, next) => {
      )
      .catch((error) => res.status(500).json(error))
     };
+    exports.findPostCom = (req, res, next) => {
+      models.comments.findAll({
+          order:[[
+               'createdAt', 'DESC'
+          ]],
+          where: {
+              postId:req.params.id,
+
+          },
+          include:{
+              model:models.posts
+          }
+      })
+          .then(comments => {return res.status(200).json(comments)})
+            .catch(error => {
+               return res.status(500).json({
+                   error
+                });
+            })
+       
+      
+  };

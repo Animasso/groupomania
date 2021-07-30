@@ -21,7 +21,7 @@ router.put('/:id',multer,postCtrl.modifyPost );
 //requete pour supprimer un objet existant
 router.delete('/:id',postCtrl.deletePost );
 //requete pour recuperer tous les commentaire de chaque post
-router.get('/:id/comments',postCtrl.findPostCom);
+
 
 
 module.exports = router;

@@ -16,7 +16,12 @@ module.exports = (sequelize, Sequelize) => sequelize.define("user", {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  admin: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   }
+
 }, {
   sequelize, 
   modelName: 'user' 
