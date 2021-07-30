@@ -45,7 +45,8 @@ export default {
   },
 created(){
 const userId= sessionStorage.getItem('user')
-  axios.get("http://localhost:3000/api/users/"+ userId , {
+const admin= sessionStorage.getItem("admin")
+  axios.get("http://localhost:3000/api/users/"+ userId + admin, {
       headers: {
           Authorization: "Bearer " + sessionStorage.token,
       },
