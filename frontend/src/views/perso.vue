@@ -29,7 +29,7 @@
                     </div>
                     </div>
                         <p class="content">{{posts.content}} </p>
-                        <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" type="submit" @click.prevent="deletePost(post)">Supprimer</button> </div>
+                        <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" @click.prevent="deletePost()">Supprimer</button> </div>
                      <div class="card p-3 border-blue mt-3"> 
                 <div class="d-flex justify-content-between mt-2">
                     <div class="d-flex flex-row">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="comments">
-                <p class="content">{{posts.comments}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies, odio in interdum tristique, erat arcu vestibulum leo, non condimentum eros risus quis tellus.</p>
+                <p class="content">{{comments.content}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies, odio in interdum tristique, erat arcu vestibulum leo, non condimentum eros risus quis tellus.</p>
                 </div>
             </div>
         </div>
@@ -82,22 +82,29 @@ export default {
          (this.user = response.data))
          .catch((err) => console.log(err));
 
-
-         axios.get("http://localhost:3000/api/users/"+userId+"/posts/comments", {
+         axios.get("http://localhost:3000/api/posts/"+ userId, {
             headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
          })
-         .then((response)=> 
-         (this.posts=response.data,
-         this.comments=response.content))
-          
-         .catch(err => console.log(err))
+         .then((response)=>{ console.log(response) 
+         this.posts =response.data})
+         .catch(err => console.log(err));
+    
+    
+        axios.get("http://localhost:3000/api/comments/"+postId,{
+        headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+    })
+    .then((response)=>{console.log(response)
+     this.comments =response.data})
+    .catch(err=>console.log(err))
     },
+    
 
 methods :{
 postMessage(){
-    
         axios
         .post("http://localhost:3000/api/posts/post")
         .then(response=>{
@@ -113,13 +120,12 @@ postMessage(){
                   Authorization: "Bearer " + sessionStorage.token,
                },
             })
-            .then((res) => console.log(res))
+            .then((response)=>{console.log(response)
+             this.$router.push("perso")})
             .catch((err) => console.log(err));
-            this.$router.push("perso")
       },
   },
   
-
 }
   
 </script>

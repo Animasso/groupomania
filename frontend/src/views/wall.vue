@@ -45,13 +45,34 @@
 
 <script>
 import navBar from '../components/navBar.vue'
-
+import axios from 'axios'
 export default {
   name:'Wall',
   components:{
     navBar
-  }
-  
+  },
+  data(){
+      return{
+          user:[],
+          posts:[],
+          content:'',
+          comments:[],
+          createdAt:'',
+     }
+  },
+   created(){
+        const userId= sessionStorage.getItem('user')
+        axios.get("http://localhost:3000/api/users/"+ userId , {
+            headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+         })
+         .then((response)=> 
+         (this.user = response.data))
+         .catch((err) => console.log(err));
+   },
+   
+   
   }
 
 
