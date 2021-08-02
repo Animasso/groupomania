@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 router.post('/',commentCtrl.createComment);
 
 //requete pour ciblé et afficher un element grace a son id
-router.get('/:id',commentCtrl.getOneComment);
+router.get('/:postId',commentCtrl.getAllComments);
 
 //requete pour les commentaire
 

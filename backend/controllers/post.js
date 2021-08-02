@@ -66,7 +66,7 @@ exports.findAllPostUser= (req, res, next) => {
     include:{
         model:models.users,
     },
-     where: { id: req.params.id }
+     where: { userId: req.params.userId }
     })
     .then((post) => res.status(200).json(post))
     .catch((error) => res.status(500).json(error));
