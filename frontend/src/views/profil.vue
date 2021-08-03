@@ -17,7 +17,8 @@
                 <hr class="line-color">
                 <div class="password">
                   <p class="heading">Changer mon email</p>
-                  <input v-model="email" type="email" class="changePassword" id="change" placeholder="nouveau email">
+                  <label class="change" for="user-email">email:</label><br/>
+                  <textarea id="user-email" v-model="user.email"></textarea>
                   <div class="third mt-4"> <button class="btn btn-success btn-block" @click.prevent="modifyProfil(user)"> Modifier</button></div>
                 </div>
                 <hr class="line-color">
@@ -56,17 +57,19 @@ const admin= sessionStorage.getItem("admin")
     .catch((err) => console.log(err));
 },
 methods:{
-  modifyProfil(user){
+   modifyProfil(user){
    
     axios.put('http://localhost:3000/api/users/'+ user.id,{
      email: user.email},
       {headers: {
-                Authorization: "Bearer " + localStorage.token,
+                Authorization: "Bearer " + sessionStorage.token,
             },
       })
-    .then((response)=> console.log(response))
+    .then((response)=>{console.log(response)
+    this.email=response.email})
     .catch((err)=> console.log(err))
   },
+  
    deleteUser() {
               const userId= sessionStorage.getItem('user')
                axios.delete("http://localhost:3000/api/users/" + userId, {
