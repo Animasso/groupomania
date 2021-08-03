@@ -24,6 +24,7 @@ var schema = new passwordValidator();
                 firstName : req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
+                admin: false,
                 password: hash,
             })
             .then((users) => res.status(200).json({
@@ -94,21 +95,24 @@ exports.getAllUsers = (req, res, next) => {
 
 
 exports.updateUser = (req, res, next) => {
-  models.users.update(
-     {
-        email: req.body.email,
-     },
-     {
+  try {
+    models.users.update({
+        email: req.body.email
+    }, {
         where: {
-           id: req.params.id,
-        },
-     }
-  )
-     .then((users) =>
-        res.status(201).json({ message: "modif effectuée !" })
-     )
-     .catch((error) => res.status(500).json(error))
-    };
+            id: (req.params.id)
+        }
+    });
+
+    return res.status(200).send({
+        message: "email modifiée"
+    })
+} catch (err) {
+    return res.status(500).json(err);
+}
+}
+
+
     exports.findPostCom = (req, res, next) => {
       models.comments.findAll({
           order:[[
