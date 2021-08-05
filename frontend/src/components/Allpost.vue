@@ -1,6 +1,6 @@
 <template>
     
-                <div class="d-flex justify-content-between mt-2">
+                <div class="d-flex justify-content-between mt-2" data-aos="fade-right">
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
                     <h6 class="mb-0"> {{user.firstName}} {{user.lastName}} </h6> <span class="date"> {{posts.createdAt}} </span>

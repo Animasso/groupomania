@@ -79,8 +79,8 @@ export default {
          this.posts =response.data})
          .catch(err => console.log(err));
     
-        const postId = parseInt(this.$route.params.id)
-        axios.get("http://localhost:3000/api/comments/"+postId,{
+        
+        axios.get("http://localhost:3000/api/comments/",{
         headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },

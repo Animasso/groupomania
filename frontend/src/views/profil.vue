@@ -18,7 +18,7 @@
                 <div class="password">
                   <p class="heading">Changer mon email</p>
                   <label class="change" for="user-email">email:</label><br/>
-                  <textarea id="user-email" v-model="user.email"></textarea>
+                  <input id="user-email" v-model="user.email">
                   <div class="third mt-4"> <button class="btn btn-success btn-block" @click.prevent="modifyProfil(user)"> Modifier</button></div>
                 </div>
                 <hr class="line-color">
@@ -66,7 +66,8 @@ methods:{
             },
       })
     .then((response)=>{console.log(response)
-    this.email=response.email})
+    this.email=response.email},
+    window.alert('modification effectué'))
     .catch((err)=> console.log(err))
   },
   
@@ -115,4 +116,5 @@ input[type=email] {
   border: none;
   border-bottom: 2px solid red;
 }
+
 </style>
