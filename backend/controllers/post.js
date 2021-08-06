@@ -16,10 +16,11 @@ exports.deletePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
 if (!req.file) {
     return models.posts.create({
-        content: req.content,
+        userId:req.body.userId,
+        content: req.body.content,
         imageUrl: "",
     })
-        .then((post) => res.status(201).json({post}))
+        .then((post) => res.status(201).json(post))
         .catch((error) => {console.log(error)
              res.status(500).json(error)});
 
