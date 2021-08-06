@@ -51,9 +51,17 @@ export default {
     font-size: large;
     font-weight: bolder;
     cursor: pointer;
-    
+     -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.nav-item:hover{
+  -webkit-transform: scale(1.2);
+	transform: scale(1.2);
 }
 .nav-link{
+  font-family: 'Comic Sans MS', cursive;
   color: rgb(12, 12, 161);
 }
 </style>

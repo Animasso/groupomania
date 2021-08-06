@@ -1,9 +1,10 @@
 <template>
     <navBar/>
+     <h1> Les membres de Groupomania</h1>
       <div class="container mt-5 d-flex justify-content-center">
             <div class="card p-4 mt-3" v-for="user in users"  v-bind:key="user.id">
                 <div class="first">
-                    <h6 class="heading">{{user.firstName}} {{user.lastName}} </h6>
+                    <h6 class="heading">{{user.firstName}} <br/>{{user.lastName}} </h6>
                     <div class="time d-flex flex-row align-items-center justify-content-between mt-3">
                     </div>
                 </div>
@@ -55,27 +56,33 @@ body {
     font-family: 'Roboto', sans-serif
 }
 .card {
-    background-color: #f19c9c;
+    background-color: #6c57e2;
     width: 350px;
-    border-radius: 20px
+    border-radius: 20px;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.card:hover{
+    -webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
+.container{
+    flex-wrap: wrap;
 }
 .heading {
     font-weight: 700
 }
-.btn {
-    border-radius: 15px !important;
-    color: black;
-    background-color:  rgb(139, 139, 146);
+h1{
+    display: flex;
+    justify-content: center;
+    color: #f11f1f;
+    font-family: 'Comic Sans MS', cursive;
 }
 .line-color {
     color: rgb(224, 17, 17);
     height: 3px
 }
-.password p{
-  font-size: bolder;
-}
-input[type=email] {
-  border: none;
-  border-bottom: 2px solid red;
-}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
     <navBar/>
-
+      <h1>Mon Profil</h1>
       <div class="container mt-5 d-flex justify-content-center">
             <div class="card p-4 mt-3">
                 <div class="first">
@@ -91,6 +91,12 @@ methods:{
 body {
     background-color: #eee;
     font-family: 'Roboto', sans-serif
+}
+h1{
+  display: flex;
+  justify-content: center;
+  color:#f03434;
+  font-family: 'Comic Sans MS', cursive;
 }
 .card {
     background-color: #f19c9c;

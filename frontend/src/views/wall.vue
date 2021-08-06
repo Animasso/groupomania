@@ -90,6 +90,7 @@ export default {
 
 <style scoped>
 h1{
+    font-family: 'Comic Sans MS', cursive;
     color:red;
 }
 .card{

@@ -8,10 +8,10 @@
                     <div class="panel panel-info">
                         <div class="panel-body">
                             <div class="form-group green-border-focus">
-                                <label for="exampleFormControlTextarea5">Postez votre message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                                <label for="postMsg">Postez votre message</label>
+                                <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
                             </div>
-                            <button class="btn btn-primary pull-right"  @click="postMessage()">Partager</button>
+                            <button class="btn btn-primary pull-right" type="text"  @click="postMessage()">Partager</button>
                         </div>
                     </div>
                 </div>
@@ -23,18 +23,10 @@
             
                 <div id="card">
                 <allpost v-for="posts in posts" v-bind:key="posts.id" :posts="posts" />
+                
                 </div>
             
-                <div class="card p-3 border-blue mt-3"> 
-                    <div class="comment d-flex justify-content-between mt-2">
-                        <div class="d-flex flex-row">
-                            <h6 class="mb-0">Animasso Sidibé</h6> <span class="date">{{createdAt}} </span>
-                        </div>
-                        <div class="com">
-                            <p class="content">{{comments.content}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies, odio in interdum tristique, erat arcu vestibulum leo, non condimentum eros risus quis tellus.</p>
-                        </div>
-                    </div>
-                </div> 
+               
         </div>
    </div>
 </template>
@@ -54,7 +46,8 @@ export default {
       return{
           user:[],
           posts:[],
-          content:'',
+          content:[],
+          post: [],
           comments:[],
           createdAt:'',
      }
@@ -80,7 +73,7 @@ export default {
          .catch(err => console.log(err));
     
         
-        axios.get("http://localhost:3000/api/comments/",{
+        axios.get("http://localhost:3000/api/comments/"+':posts.id',{
         headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
@@ -94,9 +87,14 @@ export default {
 methods :{
 postMessage(){
         axios
-        .post("http://localhost:3000/api/posts/post")
+        .post("http://localhost:3000/api/posts/post",{
+            headers: {
+                  Authorization: "Bearer " + sessionStorage.token,
+               },
+            })
         .then(response=>{
-            this.posts=response.data;
+            console.log(response);
+            this.content =response.data
             this.$router.push("perso")
         }) 
     },
@@ -121,6 +119,7 @@ postMessage(){
 
 <style scoped>
 h1{
+    font-family: 'Comic Sans MS', cursive;
    color: red;
 }
 .card{
