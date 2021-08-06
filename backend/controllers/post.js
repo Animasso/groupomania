@@ -1,5 +1,6 @@
 const fs = require('fs'); 
 const models=require('../models/index.js')
+const jwt = require('jsonwebtoken');
 
 
 exports.deletePost = (req, res, next) => {
@@ -14,16 +15,17 @@ exports.deletePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
 if (!req.file) {
-    models.posts.create({
-        ...req.body,
+    return models.posts.create({
+        content: req.content,
         imageUrl: "",
     })
         .then((post) => res.status(201).json({post}))
-        .catch((error) => res.status(500).json(error));
+        .catch((error) => {console.log(error)
+             res.status(500).json(error)});
 
     } else if (req.file) {
         models.posts.create({
-            ...req.body,
+            ...req.body, 
             UserId: userId,
             imageUrl: `${req.protocol}://${req.get("host")}/images/${
                 req.file.filename
