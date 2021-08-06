@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between mt-2">
                 <div class="d-flex flex-row">
                     <div class="d-flex flex-column">
-                        <h6 class="mb-0">{{posts.user.firstName}} {{posts.user.lastName}} </h6> <span class="date">{{posts.createdAt}} </span>
+                        <h6 class="mb-0">{{}} {{}} </h6> <span class="date">{{posts.createdAt}} </span>
                     </div>
                 </div>  
             </div>

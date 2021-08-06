@@ -22,7 +22,7 @@
         <div class="card row-8 p-3 border-blue mt-3">  
             
                 <div id="card">
-                <allpost v-for="posts in posts" v-bind:key="posts.id" :posts="posts" />
+                <allpost v-for="post in posts" v-bind:key="post.id" :post="post" />
                 
                 </div>
             
@@ -48,7 +48,7 @@ export default {
           posts:[],
           content:[],
           post: [],
-          comments:[],
+          comment:[],
           createdAt:'',
      }
   },
@@ -73,29 +73,22 @@ export default {
          .catch(err => console.log(err));
     
         
-        axios.get("http://localhost:3000/api/comments/"+':posts.id',{
-        headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-    })
-    .then((response)=>{console.log(response)
-     this.comments =response.data})
-    .catch(err=>console.log(err))
+      
     },
     
 
 methods :{
 postMessage(){
         axios
-        .post("http://localhost:3000/api/posts/post",{
+        .post("http://localhost:3000/api/posts/post",{content:this.content}, {
             headers: {
                   Authorization: "Bearer " + sessionStorage.token,
                },
             })
         .then(response=>{
             console.log(response);
-            this.content =response.data
-            this.$router.push("perso")
+            this.content = '';
+            this.posts.unshift(response.data);
         }) 
     },
     deletePost() {
