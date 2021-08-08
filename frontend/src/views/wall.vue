@@ -67,7 +67,7 @@ export default {
          (this.user = response.data))
          .catch((err) => console.log(err));
 
-         axios.get("http://localhost:3000/api/posts", {
+         axios.get("http://localhost:3000/api/auth/posts", {
              headers: {
                  Authorization: "Bearer " + sessionStorage.token,
              },

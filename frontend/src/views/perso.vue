@@ -63,7 +63,7 @@ export default {
          (this.user = response.data))
          .catch((err) => console.log(err));
 
-         axios.get("http://localhost:3000/api/posts/"+ userId, {
+         axios.get("http://localhost:3000/api/auth/posts/"+ userId, {
             headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
@@ -80,21 +80,21 @@ export default {
 methods :{
 postMessage(){
         axios
-        .post("http://localhost:3000/api/posts/post",{content:this.content}, {
+        .post("http://localhost:3000/api/auth/posts/post",{content:this.content}, {
             headers: {
                   Authorization: "Bearer " + sessionStorage.token,
                },
             })
         .then(response=>{
             console.log(response);
-            this.content = '';
+            this.content = ''; 
             this.posts.unshift(response.data);
         }) 
     },
     deletePost() {
         const userId= sessionStorage.getItem('user')
          axios
-            .delete("http://localhost:3000/api/posts/"+ userId, {
+            .delete("http://localhost:3000/api/auth/posts/"+ userId, {
                headers: {
                   Authorization: "Bearer " + sessionStorage.token,
                },
