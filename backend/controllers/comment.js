@@ -13,7 +13,7 @@ exports.deleteComment = (req, res, next) => {
 };
 
 exports.createComment = (req, res, next) => {
-    const userId= sessionStorage.getItem('userId')
+    
     const comment = {
         userId: userId,
         postId: req.body.postId,
