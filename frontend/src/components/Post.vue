@@ -3,7 +3,7 @@
             <div class="d-flex justify-content-between mt-2">
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
-                    <h6 class="mb-0"> {{post.user.firstName}} {{post.user.lastName}} </h6> <span class="date"> {{formatDate(post.createdAt)}} </span>
+                    <h6 class="mb-0"> {{user.firstName}} {{user.lastName}} </h6> <span class="date"> {{formatDate(post.createdAt)}} </span>
                 </div>
             </div>
             </div>
@@ -21,12 +21,12 @@
 
                         <div  class="com"  >
                             <p class="content">{{comment.comment}}</p>
-                            <div class="form"> <input class="form-control" placeholder="Ecrire un commentaire...">
-                            <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm">Poster</button></div>
-                        </div>
                         </div>
                         
                     </div>
+                     <div class="form"> <input class="form-control" placeholder="Ecrire un commentaire...">
+                            <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm">Poster</button></div>
+                        </div>
         </div> 
 
         
