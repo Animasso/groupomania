@@ -10,15 +10,15 @@
                 <p class="content">{{post.content}} </p>
                 <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" @click.prevent="deletePost()">Supprimer</button> </div>
         
-         <div class="card p-3 border-blue mt-3" > 
+         <div class="card p-3 mt-3"  > 
                     <div class="d-flex flex-column mt-2" v-for="comment in comments" v-bind:key="comment.id" :comment="comment" >
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-column">
-                                <h6 class="mb-0">{{comment.firstName}} {{comment.lastName}} </h6> <span class="date">{{comment.createdAt}} </span>
+                                <h6 class="mb-0">{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{comment.createdAt}} </span>
                             </div>
                         </div>
 
-                        <div class="com" >
+                        <div  class="com"  >
                             <p class="content">{{comment.comment}}</p>
                         </div>
                     </div>

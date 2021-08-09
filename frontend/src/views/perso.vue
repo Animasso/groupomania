@@ -46,6 +46,7 @@ export default {
       return{
           user:[],
           posts:[],
+          users:[],
           content:[],
           post: [],
           comment:[],
@@ -61,6 +62,17 @@ export default {
          })
          .then((response)=> 
          (this.user = response.data))
+         .catch((err) => console.log(err));
+
+         axios.get("http://localhost:3000/api/users", {
+            headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+         })
+         .then((response)=> 
+            {console.log(response),
+           (this.users = response.data)})
+       
          .catch((err) => console.log(err));
 
          axios.get("http://localhost:3000/api/auth/posts/"+ userId, {
