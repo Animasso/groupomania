@@ -22,7 +22,7 @@
         <div class="card row-8 p-3 border-blue mt-3">  
             
                 <div id="card">
-                <allpost v-for="post in posts" v-bind:key="post.id" :post="post" />
+                <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
                 
                 </div>
             
@@ -33,14 +33,14 @@
 
 <script>
 import navBar from '../components/navBar.vue'
-import Allpost from '../components/Allpost.vue'
+import Post from '../components/Post.vue'
 import axios from'axios'
 
 export default {
   name:'Perso',
   components:{
       navBar,
-      Allpost
+      Post
   },
   data(){
       return{
@@ -128,7 +128,7 @@ h1{
    color: red;
 }
 .card{
-   border: 3px solid red;
+   border: 1px solid red;
    box-shadow: 5px 5px 5px red;
 }
 .form{
