@@ -30,6 +30,7 @@ exports.getAllComments = (req, res, next) => {
        ]],
         include:{
             model:models.posts,
+            model:models.users
         },
          where: { postId: req.params.postId}
         })

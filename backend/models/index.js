@@ -29,6 +29,8 @@ db.posts.belongsTo(db.users)
 db.posts.hasMany(db.comments)
 db.comments.belongsTo(db.posts)
 
+db.users.hasMany(db.comments)
+db.comments.belongsTo(db.users)
 
 db.sequelize.sync({ alter:true });
 
