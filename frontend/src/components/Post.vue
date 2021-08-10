@@ -3,7 +3,7 @@
             <div class="d-flex justify-content-between mt-2">
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
-                    <h6 class="mb-0"> {{user.firstName}} {{user.lastName}} </h6> <span class="date"> {{formatDate(post.createdAt)}} </span>
+                    <h6 class="mb-0"> {{post.user.firstName}} {{post.user.lastName}} </h6> <span class="date"> {{formatDate(post.createdAt)}} </span>
                 </div>
             </div>
             </div>
@@ -24,9 +24,9 @@
                         </div>
                         
                     </div>
-                     <div class="form"> <input class="form-control" placeholder="Ecrire un commentaire...">
-                            <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm">Poster</button></div>
-                        </div>
+                     <div class="form"> <input class="form-control" v-model="comment" placeholder="Ecrire un commentaire...">
+                        <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm" @click.prevent="createCom(post)">Poster</button></div>
+                    </div>
         </div> 
 
         
@@ -41,6 +41,7 @@ export default {
           user:[], 
           comments:[],
           createdAt:'',
+          comment:[],
         
      }    
     },
@@ -82,7 +83,34 @@ export default {
         minute:"numeric"
 
       });
-    },
+         },
+         deletePost() {
+         axios
+            .delete("http://localhost:3000/api/auth/posts/"+ this.post.id, {
+               headers: {
+                  Authorization: "Bearer " + sessionStorage.token,
+               },
+            })
+            .then((response)=>{console.log(response)
+              this.$router.push("/wall")
+             })
+            .catch((err) => console.log(err));
+        },
+        createCom(post){
+            axios
+         .post("http://localhost:3000/api/auth/comments/",{comment:this.comment,postId:post.id},{
+             headers: {
+                  Authorization: "Bearer " + sessionStorage.token,
+               },
+         })
+         .then((response)=>{console.log(response)
+         this.comment = ''; 
+         window.location.reload();
+         })
+         
+
+        }
+        
     }
     
    }
@@ -103,4 +131,5 @@ h2{
 .form{
     margin-top: 30px;
 }
+
 </style>

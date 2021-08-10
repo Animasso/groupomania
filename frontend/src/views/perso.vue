@@ -103,18 +103,7 @@ postMessage(){
             this.posts.unshift(response.data);
         }) 
     },
-    deletePost() {
-        const userId= sessionStorage.getItem('user')
-         axios
-            .delete("http://localhost:3000/api/auth/posts/"+ userId, {
-               headers: {
-                  Authorization: "Bearer " + sessionStorage.token,
-               },
-            })
-            .then((response)=>{console.log(response)
-             this.$router.push("perso")})
-            .catch((err) => console.log(err));
-      },
+    
   },
   
 }
@@ -123,6 +112,9 @@ postMessage(){
 
 
 <style scoped>
+html{
+    background-color: black;
+}
 h1{
     font-family: 'Comic Sans MS', cursive;
    color: red;
@@ -133,5 +125,16 @@ h1{
 }
 .form{
     margin-top: 30px;
+
 }
+
+.form-control{
+    border: 2px solid red;
+    border-radius: 20px;
+}
+label{
+    font-family: 'Comic Sans MS', cursive;
+    color:rgb(48, 48, 172)
+}
+
 </style> 
