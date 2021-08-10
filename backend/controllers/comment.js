@@ -1,5 +1,5 @@
 const models =require('../models/index.js');
-
+const jwt = require('jsonwebtoken');
 
 exports.deleteComment = (req, res, next) => {
     models.comments.findOne({ where: { id: req.params.id } })
@@ -13,7 +13,10 @@ exports.deleteComment = (req, res, next) => {
 };
 
 exports.createComment = (req, res, next) => {
-    
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const userId = decodedToken.userId;
+
     const comment = {
         userId: userId,
         postId: req.body.postId,
