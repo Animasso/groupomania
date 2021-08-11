@@ -16,6 +16,7 @@
                     
                 <p class="card__subtitle" v-if="mode == 'login'">Tu n'as pas encore de compte ?  <span class="card__action" @click="switchToCreateAccount()"> Créer un compte</span></p>
                 <p class="card__subtitle" v-else>Tu as déjà un compte ?  <span class="card__action" @click="switchToLogin()"> Se connecter</span></p>
+                <div class="mgs">{{message}}</div>
                     </div>
                  
                  
@@ -42,6 +43,7 @@
                 <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userLogin()" v-if="mode == 'login'">Se connecter</button>
                 <button type="submit" class=" btn btn-primary w-auto justify-content-center" @click.prevent="userRegister()" v-else>Inscription</button>
             </div>
+            
             </fieldset>
     </div>
     
@@ -60,6 +62,7 @@ export default {
       lastName: '',
       email: '',
       password: '',
+      message: '',
     }
   },
   methods:{
@@ -103,9 +106,7 @@ export default {
     },
      userRegister(){
       if (this.firstName == "" || this.password == "" || this.email == "" || this.lastName == "" ) {
-        alert(
-          "Veuillez remplir tous les champs"
-        );
+        alert("Veuillez remplir tous les champs");
       } 
       else {
         axios
@@ -169,5 +170,10 @@ h1{
     }
     .form-control{
         margin-top: 10px;
+    }
+    .mgs{
+      display: flex;
+      justify-content: center;
+      color:red;
     }
 </style> 

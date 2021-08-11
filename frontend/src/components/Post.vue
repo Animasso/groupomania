@@ -18,11 +18,11 @@
                                 <h6 class="mb-0">{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{ formatDate(post.createdAt) }}</span>
                             </div>
                         </div>
-
-                        <div  class="com"  >
+                        <div  class="com d-flex justify-content-between"  >
                             <p class="content">{{comment.comment}}</p>
+                             <button class="btn btn-outline-secondary btn-sm" @click.prevent="deleteCom(comment)"><i class="fas fa-trash"></i></button>
                         </div>
-                        
+ 
                     </div>
                      <div class="form"> <input class="form-control" v-model="comment" placeholder="Ecrire un commentaire...">
                         <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm" @click.prevent="createCom(post)">Poster</button></div>
@@ -74,16 +74,16 @@ export default {
     },
     methods:{
         formatDate(date) {
-      return new Date(date).toLocaleDateString("fr-FR", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour:"numeric",
-        minute:"numeric"
-
-      });
+            return new Date(date).toLocaleDateString("fr-FR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour:"numeric",
+            minute:"numeric"
+            });
          },
+
          deletePost() {
          axios
             .delete("http://localhost:3000/api/auth/posts/"+ this.post.id, {
@@ -96,6 +96,7 @@ export default {
              })
             .catch((err) => console.log(err));
         },
+
         createCom(post){
             axios
          .post("http://localhost:3000/api/auth/comments/",{comment:this.comment,postId:post.id},{
@@ -107,10 +108,20 @@ export default {
          this.comment = ''; 
          window.location.reload();
          })
-         
+        },
 
-        }
+         deleteCom(comment){
+             axios
+             .delete("http://localhost:3000/api/auth/comments/" + comment.id,{
+                 headers: {
+                     Authorization: "Bearer " + sessionStorage.token,
+                 },
+             })
+             .then((response)=>{console.log(response)
+             window.location.reload()})
+         }
         
+
     }
     
    }
