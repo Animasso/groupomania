@@ -8,7 +8,7 @@
             </div>
             </div>
                 <p class="content">{{post.content}} </p>
-                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" @click.prevent="deletePost()">Supprimer</button> </div>
+                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id" @click.prevent="deletePost()">Supprimer</button> </div>
               
          <div class="card p-3 mt-3"  > 
                <h2>Commentaires</h2>
@@ -20,7 +20,7 @@
                         </div>
                         <div  class="com d-flex justify-content-between"  >
                             <p class="content">{{comment.comment}}</p>
-                             <button class="btn btn-outline-secondary btn-sm" @click.prevent="deleteCom(comment)"><i class="fas fa-trash"></i></button>
+                             <button class="btn btn-outline-secondary btn-sm" v-if="comment.userId===user.id || user.admin=== true" @click.prevent="deleteCom(comment)"><span class="trash"><i class="fas fa-trash"></i></span></button>
                         </div>
  
                     </div>
@@ -142,5 +142,7 @@ h2{
 .form{
     margin-top: 30px;
 }
-
+.trash{
+    color: red;
+}
 </style>
