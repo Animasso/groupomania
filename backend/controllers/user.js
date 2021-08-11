@@ -17,10 +17,12 @@ var schema = new passwordValidator();
 
  
   exports.signup = (req, res, next) => {
-    console.log(req)
+    if (!mailValidator.validate(req.body.email) || (!schema.validate(req.body.password))) {  
+      throw { error: " invalide !" }  
+    } else if (mailValidator.validate(req.body.email) && (schema.validate(req.body.password)))
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            models.users.create({
+            models.users.create({ 
                 firstName : req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
