@@ -10,8 +10,8 @@
                 </div>
                 <div class="second d-flex flex-row mt-2">
                     <div class="main">
-                        <div class="d-flex flex-row mb-1"> <span> {{user.email}} </span>
-                        </div>
+                        <div class="d-flex flex-row mb-1"> <span> {{user.email}} </span></div>
+                        
                     </div>
                 </div> 
                 

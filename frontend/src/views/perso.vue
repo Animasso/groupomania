@@ -23,10 +23,8 @@
             
                 <div id="card">
                 <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
-                
                 </div>
             
-               
         </div>
    </div>
 </template>

@@ -10,12 +10,12 @@
                 <p class="content">{{post.content}} </p>
                 <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id" @click.prevent="deletePost()">Supprimer</button> </div>
               
-         <div class="card p-3 mt-3"  > 
+         <div class="card p-3 mt-3"> 
                <h2>Commentaires</h2>
                     <div class="d-flex flex-column mt-2" v-for="comment in comments" v-bind:key="comment.id" :comment="comment" >
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-column">
-                                <h6 class="mb-0">{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{ formatDate(post.createdAt) }}</span>
+                                <h6 class="mb-0">{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{ formatDate( comment.createdAt) }}</span>
                             </div>
                         </div>
                         <div  class="com d-flex justify-content-between"  >
@@ -106,7 +106,7 @@ export default {
          })
          .then((response)=>{console.log(response)
          this.comment = ''; 
-         window.location.reload();
+         this.posts.unshift(response.data)
          })
         },
 
