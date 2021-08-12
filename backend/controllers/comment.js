@@ -20,6 +20,7 @@ exports.createComment = (req, res, next) => {
         postId: req.body.postId,
         comment: req.body.comment
     };
+    
     models.comments.create(comment)
         .then(() => res.status(201).json({ message: "commentaire crée!" }))
         .catch(error => res.status(400).json({ error }));
