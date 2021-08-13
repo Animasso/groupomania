@@ -6,30 +6,34 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
+  `admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_Id` int NOT NULL,
   `content` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
+  `userId` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_Id_idx` (`user_Id`),
-  CONSTRAINT `user_Id` FOREIGN KEY (`user_Id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `posts_ibfk_1` (`userId`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `post_Id` int NOT NULL,
   `comment` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `postId` int DEFAULT NULL,
+  `userId` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `post_Id_idx` (`post_Id`),
-  CONSTRAINT `post_Id` FOREIGN KEY (`post_Id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `comments_ibfk_41` (`postId`),
+  KEY `comments_ibfk_42` (`userId`),
+  CONSTRAINT `comments_ibfk_41` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comments_ibfk_42` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
