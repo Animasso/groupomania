@@ -68,6 +68,11 @@ export default {
 
 
 <style scoped>
+#app{
+   font-family
+   :Comic Sans MS, cursive;
+ 
+}
 h1{
     font-family: 'Comic Sans MS', cursive;
     color:red;

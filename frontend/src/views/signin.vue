@@ -32,6 +32,7 @@
           >
         </p>
         <div class="mgs">{{ message }}</div>
+        <div class="mgs">{{ emessage }}</div>
       </div>
 
       <div class="row-8 d-flex align-items-center flex-column">
@@ -114,6 +115,7 @@ export default {
       email: "",
       password: "",
       message: "",
+      emessage:"",
     };
   },
   methods: {
@@ -123,7 +125,7 @@ export default {
     switchToLogin: function () {
       this.mode = "login";
     },
-    userLogin: function () {
+    userLogin () {
       if (this.email == "" || this.password == "") {
         alert(
           "Veuillez entrer votre email et votre mot de passe pour vous connecter"
@@ -178,7 +180,8 @@ export default {
           })
           .catch(() => {
             {
-              this.message = "utilisateur non trouvé";
+              this.emessage =`"votre mot de passe doit contenir min 8 caractère"
+                              "1 maj et 2 chiffres"` ;
             }
           });
       }
@@ -189,6 +192,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#app{
+   font-family
+   :Comic Sans MS, cursive;
+ 
+}
 h1 {
   font-size: larger;
 }

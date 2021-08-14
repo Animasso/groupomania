@@ -8,21 +8,20 @@
             </div>
             </div>
                 <p class="content">{{post.content}} </p>
-                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id" @click.prevent="deletePost()">Supprimer</button> </div>
+                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id|| user.admin=== true" @click.prevent="deletePost()">Supprimer</button> </div>
               
          <div class="card p-3 mt-3"> 
                <h2>Commentaires</h2>
                     <div class="d-flex flex-column mt-2" v-for="comment in comments" v-bind:key="comment.id" :comment="comment" >
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-column">
-                                <h6 class="mb-0">{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{ formatDate( comment.createdAt) }}</span>
+                                <h6 class="mb-0"  >{{comment.user.firstName}} {{comment.user.lastName}} </h6> <span class="date">{{ formatDate( comment.createdAt) }}</span>
                             </div>
                         </div>
                         <div  class="com d-flex justify-content-between"  >
                             <p class="content">{{comment.comment}}</p>
                              <button class="btn btn-outline-secondary btn-sm" v-if="comment.userId===user.id || user.admin=== true" @click.prevent="deleteCom(comment)"><span class="trash"><i class="fas fa-trash"></i></span></button>
                         </div>
- 
                     </div>
                      <div class="form"> <input class="form-control" v-model="comment" placeholder="Ecrire un commentaire...">
                         <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm" @click.prevent="createCom(post)">Poster</button></div>
@@ -34,7 +33,7 @@
 <script>
 import axios from 'axios'
 export default {
-    name:'post',
+    name:'Post',
     
     data() {
         return{
@@ -42,6 +41,8 @@ export default {
           comments:[],
           createdAt:'',
           comment:[],
+          firstName:'',
+          lastName:'',
         
      }    
     },
@@ -70,8 +71,8 @@ export default {
         .then((response)=>{console.log(response)
          this.comments =response.data})
         .catch(err=>console.log(err))
-        
     },
+    
     methods:{
         formatDate(date) {
             return new Date(date).toLocaleDateString("fr-FR", {
@@ -106,8 +107,9 @@ export default {
          })
          .then((response)=>{console.log(response)
          this.comment = ''; 
-         this.posts.unshift(response.data)
+        
          })
+          .catch((err) => console.log(err));
         },
 
          deleteCom(comment){
@@ -119,6 +121,7 @@ export default {
              })
              .then((response)=>{console.log(response)
              window.location.reload()})
+              .catch((err) => console.log(err));
          }
         
 
@@ -128,6 +131,11 @@ export default {
 </script>
 
 <style scoped>
+#app{
+   font-family
+   :Comic Sans MS, cursive;
+ 
+}
 h1{
     font-family: 'Comic Sans MS', cursive;
    color: red;
@@ -137,7 +145,7 @@ h2{
 }
 .card{
    border: 1px solid red;
-   box-shadow: 5px 5px 5px red;
+   box-shadow: 2px 3px 3px red;
 }
 .form{
     margin-top: 30px;

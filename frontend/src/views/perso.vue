@@ -98,7 +98,7 @@ postMessage(){
         .then(response=>{
             console.log(response);
             this.content = ''; 
-            this.posts.unshift(response.data);
+            this.post.unshift(response.data);
         }) 
     },
     
@@ -110,8 +110,13 @@ postMessage(){
 
 
 <style scoped>
-html{
-    background-color: black;
+body{
+    background-attachment: fixed;
+    background-image:'../assets/icon.png ';
+    background-size: cover;
+}
+.container{
+   font-family: 'Comic Sans MS', cursive ;
 }
 h1{
     font-family: 'Comic Sans MS', cursive;
@@ -119,7 +124,7 @@ h1{
 }
 .card{
    border: 1px solid red;
-   box-shadow: 5px 5px 5px red;
+   box-shadow: 2px 3px 3px red;
 }
 .form{
     margin-top: 30px;

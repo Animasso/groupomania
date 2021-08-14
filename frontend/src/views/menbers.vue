@@ -51,9 +51,13 @@ created(){
 </script>
 
 <style scoped>
+#app{
+   font-family
+   :Comic Sans MS, cursive;
+ 
+}
 body {
     background-color: #eee;
-    font-family: 'Roboto', sans-serif
 }
 .card {
     background-color: #6c57e2;

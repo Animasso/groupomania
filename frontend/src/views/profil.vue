@@ -88,9 +88,14 @@ methods:{
 
 </script>
 <style scoped>
+#app{
+   font-family
+   :Comic Sans MS, cursive;
+ 
+}
 body {
     background-color: #eee;
-    font-family: 'Roboto', sans-serif
+
 }
 h1{
   display: flex;
