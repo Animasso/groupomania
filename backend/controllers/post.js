@@ -22,6 +22,7 @@ if (!req.file) {
     return models.posts.create({
         userId: userId,
         content: req.body.content,
+        title: req.body.title,
         imageUrl: "",
     })
         .then((post) => res.status(201).json(post))
