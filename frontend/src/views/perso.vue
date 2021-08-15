@@ -8,6 +8,8 @@
                     <div class="panel panel-info">
                         <div class="panel-body">
                             <div class="form-group green-border-focus">
+                                <label for="title">Titre</label><br />
+                                <input type="text" v-model="title" class="form-control"><br />
                                 <label for="postMsg">Postez votre message</label>
                                 <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
                             </div>
@@ -49,6 +51,7 @@ export default {
           post: [],
           comment:[],
           createdAt:'',
+          title:'',
      }
   },
    created(){
@@ -90,7 +93,7 @@ export default {
 methods :{
 postMessage(){
         axios
-        .post("http://localhost:3000/api/auth/posts/post",{content:this.content}, {
+        .post("http://localhost:3000/api/auth/posts/post",{content:this.content,title:this.title}, {
             headers: {
                   Authorization: "Bearer " + sessionStorage.token,
                },
@@ -98,6 +101,7 @@ postMessage(){
         .then(response=>{
             console.log(response);
             this.content = ''; 
+            this.title = '';
             this.post.unshift(response.data);
         }) 
     },
@@ -110,11 +114,7 @@ postMessage(){
 
 
 <style scoped>
-body{
-    background-attachment: fixed;
-    background-image:'../assets/icon.png ';
-    background-size: cover;
-}
+
 .container{
    font-family: 'Comic Sans MS', cursive ;
 }
@@ -132,12 +132,20 @@ h1{
 }
 
 .form-control{
-    border: 2px solid red;
     border-radius: 20px;
+}
+.form-group{
+    margin-top:30px;
 }
 label{
     font-family: 'Comic Sans MS', cursive;
     color:rgb(48, 48, 172)
+}
+.row{
+    
+    margin-bottom: 50px;
+    margin-top: 50px;
+    background-color: rgb(216, 212, 206);
 }
 
 </style> 

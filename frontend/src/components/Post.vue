@@ -7,7 +7,10 @@
                 </div>
             </div>
             </div>
+                <div class="titleCon">
+                <p class ="title"> {{post.title}}</p>
                 <p class="content">{{post.content}} </p>
+                </div>
                 <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id|| user.admin=== true" @click.prevent="deletePost()">Supprimer</button> </div>
               
          <div class="card p-3 mt-3"> 
@@ -43,6 +46,7 @@ export default {
           comment:[],
           firstName:'',
           lastName:'',
+          title:'',
         
      }    
     },
@@ -146,11 +150,18 @@ h2{
 .card{
    border: 1px solid red;
    box-shadow: 2px 3px 3px red;
+   background-color: antiquewhite;
 }
 .form{
     margin-top: 30px;
 }
 .trash{
     color: red;
+}
+.titleCon{
+    margin-top:20px;
+}
+.title{
+    font-weight: bolder;
 }
 </style>

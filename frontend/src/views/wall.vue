@@ -68,10 +68,8 @@ export default {
 
 
 <style scoped>
-#app{
-   font-family
-   :Comic Sans MS, cursive;
- 
+.container{
+   font-family: 'Comic Sans MS', cursive ;
 }
 h1{
     font-family: 'Comic Sans MS', cursive;
