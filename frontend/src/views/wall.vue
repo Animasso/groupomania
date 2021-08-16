@@ -16,7 +16,7 @@
 
 <script>
 import navBar from '../components/navBar.vue'
-import Post from '../components/Post.vue'
+import Post from '../components/Post'
 import axios from 'axios'
 
 export default {
@@ -46,7 +46,7 @@ export default {
          (this.users = response.data))
          .catch((err) => console.log(err));
 
-         axios.get("http://localhost:3000/api/auth/posts", {
+     axios.get("http://localhost:3000/api/auth/posts", {
              headers: {
                  Authorization: "Bearer " + sessionStorage.token,
              },
@@ -55,9 +55,10 @@ export default {
          this.posts= response.data})
          .catch((err) => console.log(err));
    },
-   
-   
-  }
+  
+}
+
+
 
 
 
@@ -68,9 +69,7 @@ export default {
 
 
 <style scoped>
-.container{
-   font-family: 'Comic Sans MS', cursive ;
-}
+
 h1{
     font-family: 'Comic Sans MS', cursive;
     color:red;

@@ -47,6 +47,7 @@ export default {
           firstName:'',
           lastName:'',
           title:'',
+          componentKey: 0,
         
      }    
     },
@@ -97,8 +98,8 @@ export default {
                },
             })
             .then((response)=>{console.log(response)
-              this.$router.push("/wall")
-             })
+            
+            })
             .catch((err) => console.log(err));
         },
 
@@ -111,6 +112,14 @@ export default {
          })
          .then((response)=>{console.log(response)
          this.comment = ''; 
+          axios.get("http://localhost:3000/api/auth/comments/"+this.post.id,{
+        headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+        })
+        .then((response)=>{console.log(response)
+         this.comments =response.data})
+        .catch(err=>console.log(err))
         
          })
           .catch((err) => console.log(err));
@@ -124,7 +133,15 @@ export default {
                  },
              })
              .then((response)=>{console.log(response)
-             window.location.reload()})
+             axios.get("http://localhost:3000/api/auth/comments/"+this.post.id,{
+            headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+                },
+            })
+        .then((response)=>{console.log(response)
+         this.comments =response.data})
+        .catch(err=>console.log(err))
+             })
               .catch((err) => console.log(err));
          }
         

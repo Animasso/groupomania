@@ -10,8 +10,7 @@
                 </div>
                 <div class="second d-flex flex-row mt-2">
                     <div class="main">
-                        <div class="d-flex flex-row mb-1"> <span> {{user.email}} </span></div>
-                        
+                        <div class="d-flex flex-row mb-1"> <span> {{user.email}} </span></div>   
                     </div>
                 </div> 
                 
@@ -46,6 +45,19 @@ created(){
     
     .catch((err) => console.log(err));
 },
+methods:{
+    deleteOneUser() {
+              const userId= sessionStorage.getItem('user')
+               axios.delete("http://localhost:3000/api/users/" + userId, {
+                    headers: { Authorization: "Bearer " + localStorage.token },
+               })
+                    .then((response) => console.log(response))
+                    .catch((err) => console.log(err));
+                    sessionStorage.clear();
+                    this.$router.push("/")
+              
+          },
+}
 
 }
 </script>

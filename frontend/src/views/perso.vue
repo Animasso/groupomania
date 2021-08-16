@@ -8,9 +8,9 @@
                     <div class="panel panel-info">
                         <div class="panel-body">
                             <div class="form-group green-border-focus">
-                                <label for="title">Titre</label><br />
+                                <label for="title">Sujet</label><br />
                                 <input type="text" v-model="title" class="form-control"><br />
-                                <label for="postMsg">Postez votre message</label>
+                                <label for="postMsg">Exprimez vous</label>
                                 <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
                             </div>
                             <button class="btn btn-primary pull-right" type="text"  @click="postMessage()">Partager</button>
@@ -33,7 +33,7 @@
 
 <script>
 import navBar from '../components/navBar.vue'
-import Post from '../components/Post.vue'
+import Post from '../components/Post'
 import axios from'axios'
 
 export default {
@@ -52,6 +52,7 @@ export default {
           comment:[],
           createdAt:'',
           title:'',
+
      }
   },
    created(){
@@ -102,10 +103,21 @@ postMessage(){
             console.log(response);
             this.content = ''; 
             this.title = '';
-            this.post.unshift(response.data);
+            const userId= sessionStorage.getItem('user')
+             axios.get("http://localhost:3000/api/auth/posts/"+ userId, {
+            headers: {
+               Authorization: "Bearer " + sessionStorage.token,
+            },
+         })
+         .then((response)=>{ console.log(response) 
+         this.posts =response.data})
+         .catch(err => console.log(err));
+            
         }) 
     },
     
+    
+
   },
   
 }
