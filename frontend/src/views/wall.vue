@@ -69,7 +69,9 @@ export default {
 
 
 <style scoped>
-
+.container{
+     font-family: 'Comic Sans MS', cursive;
+}
 h1{
     font-family: 'Comic Sans MS', cursive;
     color:red;
@@ -77,6 +79,7 @@ h1{
 .card{
    border: 1px solid red;
    box-shadow: 2px 2px 2px red;
+    background-color: rgb(218, 212, 212);
 }
 .form{
     margin-top: 30px;

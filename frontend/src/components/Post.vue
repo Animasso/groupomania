@@ -11,7 +11,7 @@
                 <p class ="title"> {{post.title}}</p>
                 <p class="content">{{post.content}} </p>
                 </div>
-                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id|| user.admin=== true" @click.prevent="deletePost()">Supprimer</button> </div>
+                <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-primary btn-sm ms-1" v-if="post.userId===user.id|| user.admin=== true" @click.prevent="deletePost(post)">Supprimer</button> </div>
               
          <div class="card p-3 mt-3"> 
                <h2>Commentaires</h2>
@@ -98,7 +98,7 @@ export default {
                },
             })
             .then((response)=>{console.log(response)
-            
+             this.$router.push("wall");
             })
             .catch((err) => console.log(err));
         },
@@ -112,7 +112,7 @@ export default {
          })
          .then((response)=>{console.log(response)
          this.comment = ''; 
-          axios.get("http://localhost:3000/api/auth/comments/"+this.post.id,{
+        axios.get("http://localhost:3000/api/auth/comments/"+this.post.id,{
         headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },

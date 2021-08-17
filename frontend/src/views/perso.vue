@@ -137,6 +137,7 @@ h1{
 .card{
    border: 1px solid red;
    box-shadow: 2px 3px 3px red;
+    background-color: rgb(218, 212, 212);;
 }
 .form{
     margin-top: 30px;
