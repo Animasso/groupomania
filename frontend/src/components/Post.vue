@@ -1,5 +1,5 @@
 <template>
-    
+            <main>
             <div class="d-flex justify-content-between mt-2">
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
@@ -27,11 +27,13 @@
                         </div>
                     </div>
                      <div class="form"> <input class="form-control" v-model="comment" placeholder="Ecrire un commentaire...">
+                            <div class="mgs">{{ message }}</div>
+
                         <div class="mt-2 d-flex justify-content-end"> <button class="btn btn-outline-secondary btn-sm" @click.prevent="createCom(post)">Poster</button></div>
                     </div>
         </div> 
 
-        
+            </main>
 </template>
 <script>
 import axios from 'axios'
@@ -47,7 +49,7 @@ export default {
           firstName:'',
           lastName:'',
           title:'',
-          componentKey: 0,
+          message: '',
         
      }    
     },
@@ -104,7 +106,9 @@ export default {
         },
 
         createCom(post){
-            axios
+            if (this.comment=='') {this.message='Ne pas poster avec un champs vide'}
+           else{
+               axios
          .post("http://localhost:3000/api/auth/comments/",{comment:this.comment,postId:post.id},{
              headers: {
                   Authorization: "Bearer " + sessionStorage.token,
@@ -118,11 +122,13 @@ export default {
             },
         })
         .then((response)=>{console.log(response)
-         this.comments =response.data})
+         this.comments =response.data
+         this.message=''})
         .catch(err=>console.log(err))
         
          })
           .catch((err) => console.log(err));
+           } 
         },
 
          deleteCom(comment){
@@ -180,5 +186,8 @@ h2{
 }
 .title{
     font-weight: bolder;
+}
+.mgs {
+  color: red;
 }
 </style>

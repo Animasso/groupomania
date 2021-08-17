@@ -1,7 +1,7 @@
 <template>
 <navBar />
    <div class ="container">
-      <div class="container pb-cmnt-container">
+      <div class="container pb-cmnt-container" >
       <h1>Bienvenue sur ton espace {{user.firstName}} {{user.lastName}} </h1>
             <div class="row">
                 <div class="col-md-9 col-md-offset-3">
@@ -12,6 +12,7 @@
                                 <input type="text" v-model="title" class="form-control"><br />
                                 <label for="postMsg">Exprimez vous</label>
                                 <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
+                                 <div class="mgs">{{ message }}</div>
                             </div>
                             <button class="btn btn-primary pull-right" type="text"  @click="postMessage()">Partager</button>
                         </div>
@@ -23,7 +24,7 @@
         
         <div class="card row-8 p-3 border-blue mt-3">  
             
-                <div id="card">
+                <div id="card" >
                 <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
                 </div>
             
@@ -52,7 +53,7 @@ export default {
           comment:[],
           createdAt:'',
           title:'',
-
+          message: '',
      }
   },
    created(){
@@ -93,6 +94,9 @@ export default {
 
 methods :{
 postMessage(){
+    if (this.content==''|| this.title=='') {
+        (this.message="Veuillez inscrire un sujet et un message")
+    }else{
         axios
         .post("http://localhost:3000/api/auth/posts/post",{content:this.content,title:this.title}, {
             headers: {
@@ -110,10 +114,12 @@ postMessage(){
             },
          })
          .then((response)=>{ console.log(response) 
-         this.posts =response.data})
-         .catch(err => console.log(err));
-            
+         this.posts =response.data
+         this.message=''})
+         .catch(err => console.log(err)); 
         }) 
+    }
+        
     },
     
     
@@ -155,10 +161,12 @@ label{
     color:rgb(48, 48, 172)
 }
 .row{
-    
     margin-bottom: 50px;
     margin-top: 50px;
     background-color: rgb(216, 212, 206);
+}
+.mgs {
+  color: red;
 }
 
 </style> 
