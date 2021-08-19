@@ -11,11 +11,10 @@ const auth = require('./middleware/auth')
 
 
 
-/*const limiter = rateLimit({
+const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100 // 100 requests per windowMs
 });
-*/
 
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
@@ -34,15 +33,15 @@ app.use(express.json());
 
 
 app.use('/api/users', userRoutes); 
-app.use('/api/auth/multer/posts', postRoutes); 
+app.use('/api/auth/posts', postRoutes); 
 app.use('/api/auth/comments', commentRoutes); 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 
-/*app.use(helmet());
+app.use(helmet());
 app.use(limiter);
-*/
+
 
 
 

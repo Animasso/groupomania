@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => sequelize.define("post", {
   },
   title :{
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   content: {
     type: DataTypes.STRING,
