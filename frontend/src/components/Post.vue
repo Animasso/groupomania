@@ -87,7 +87,9 @@ export default {
       lastName: "",
       title: "",
       message: "",
-      file: null,
+      image: null,
+      content:'',
+      posts:[]
     };
   },
   props: {
@@ -132,16 +134,17 @@ export default {
       });
     },
 
-    deletePost() {
+    deletePost(post) {
       axios
-        .delete("http://localhost:3000/api/auth/multer/posts/" + this.post.id, {
+        .delete("http://localhost:3000/api/auth/multer/posts/" + post.id, {
           headers: {
-            Authorization: "Bearer " + sessionStorage.token,
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
           },
         })
         .then((response) => {
           console.log(response);
-          window.location.reload()
+          this.posts = this.posts.filter((post) => post.id != this.post.id);
+          
         })
         .catch((err) => console.log(err));
     },
@@ -209,9 +212,7 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  font-family: Comic Sans MS, cursive;
-}
+
 h1 {
   font-family: "Comic Sans MS", cursive;
   color: red;

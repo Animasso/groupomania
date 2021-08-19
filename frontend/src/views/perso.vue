@@ -1,182 +1,177 @@
 <template>
-<navBar />
-   <div class ="container">
-      <div class="container pb-cmnt-container" >
-      <h1>Bienvenue sur ton espace {{user.firstName}} {{user.lastName}} </h1>
-            <div class="row">
-                <div class="col-md-9 col-md-offset-3">
-                    <div class="panel panel-info">
-                        <div class="panel-body">
-                            <div class="form-group green-border-focus">
-                                <label for="title">Sujet</label><br />
-                                <input type="text" v-model="title" class="form-control"><br />
-                                <label for="postMsg">Exprimez vous</label>
-                                <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
-                                 <div class="mgs">{{ message }}</div>
-                            </div>
-                            <label for="file">Charger une image:</label>
-                            <input type="file" accept="image/*" @change="onFileSelect" >
-                            <button class="btn btn-primary pull-right" type="text"  @click="postMessage()">Partager</button>
-                        </div>
-                    </div>
-                </div>
+  <navBar />
+  <div class="container">
+    <div class="container pb-cmnt-container">
+      <h1>Bienvenue sur ton espace {{ user.firstName }} {{ user.lastName }}</h1>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+          <div class="panel panel-info">
+            <div class="panel-body">
+              <div class="form-group green-border-focus">
+                <label for="title">Sujet</label><br />
+                <input type="text" v-model="title" class="form-control" /><br />
+                <label for="postMsg">Exprimez vous</label>
+                <textarea
+                  v-model="content"
+                  class="form-control"
+                  id="postMgs"
+                  rows="3"
+                ></textarea>
+                <div class="mgs">{{ message }}</div>
+              </div>
+              <label for="file">Charger une image:</label>
+              <input type="file" accept="image/*" @change="onFileSelect" />
+              <button
+                class="btn btn-primary pull-right"
+                type="text"
+                @click="postMessage()"
+              >
+                Partager
+              </button>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        
-        <div class="card row-8 p-3 border-blue mt-3">  
-            
-                <div id="card" >
-                <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
-                </div>
-            
-        </div>
-   </div>
+    <div class="card row-8 p-3 border-blue mt-3">
+      <div id="card">
+        <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import navBar from '../components/navBar.vue'
-import Post from '../components/Post'
-import axios from'axios'
+import navBar from "../components/navBar.vue";
+import Post from "../components/Post";
+import axios from "axios";
 
 export default {
-  name:'Perso',
-  components:{
-      navBar,
-      Post
+  name: "Perso",
+  components: {
+    navBar,
+    Post,
   },
-  data(){
-      return{
-          user:[],
-          posts:[],
-          users:[],
-          content:[],
-          post: [],
-          comment:[],
-          createdAt:'',
-          title:'',
-          message: '',
-          image: null
-     }
+  data() {
+    return {
+      user: [],
+      posts: [],
+      users: [],
+      content: "",
+      post: [],
+      comment: [],
+      createdAt: "",
+      title: "",
+      message: "",
+      image: null,
+    };
   },
-   created(){
-        const userId= sessionStorage.getItem('user')
-        axios.get("http://localhost:3000/api/users/"+ userId , {
-            headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-         })
-         .then((response)=> 
-         (this.user = response.data))
-         .catch((err) => console.log(err));
+  created() {
+    const userId = sessionStorage.getItem("user");
+    axios
+      .get("http://localhost:3000/api/users/" + userId, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.token,
+        },
+      })
+      .then((response) => (this.user = response.data))
+      .catch((err) => console.log(err));
 
-         axios.get("http://localhost:3000/api/users", {
-            headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-         })
-         .then((response)=> 
-            {console.log(response),
-           (this.users = response.data)})
-       
-         .catch((err) => console.log(err));
+    axios
+      .get("http://localhost:3000/api/users", {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.token,
+        },
+      })
+      .then((response) => {
+        console.log(response), (this.users = response.data);
+      })
 
-         axios.get("http://localhost:3000/api/auth/multer/posts/"+ userId, {
-            headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-         })
-         .then((response)=>{ console.log(response) 
-         this.posts =response.data})
-         .catch(err => console.log(err));
-    
-        
-      
-    },
-    
+      .catch((err) => console.log(err));
 
-methods :{
-postMessage(){
-    if (this.content==''|| this.title=='') {
-        (this.message="Veuillez inscrire un sujet et un message")
-    }else{
-        const fd = new FormData()
-        fd.append('image',this.image)
-        axios
-        .post("http://localhost:3000/api/auth/multer/posts/post",fd,{content:this.content,title:this.title}, {
+    axios
+      .get("http://localhost:3000/api/auth/multer/posts/" + userId, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        this.posts = response.data;
+      })
+      .catch((err) => console.log(err));
+  },
+
+  methods: {
+    postMessage() {
+      axios
+        .post(
+          "http://localhost:3000/api/auth/multer/posts/post",
+          { content: this.content, title: this.title },
+          {
             headers: {
-                'content-type': 'multipart/form-data',
-                  Authorization: "Bearer " + sessionStorage.token,
-               },
+              Authorization: "Bearer " + sessionStorage.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          this.content = "";
+          this.title = "";
+          const userId = sessionStorage.getItem("user");
+          axios
+            .get("http://localhost:3000/api/auth/multer/posts/" + userId, {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.token,
+              },
             })
-        .then(response=>{
-            console.log(response);
-            this.content = ''; 
-            this.title = '';
-            const userId= sessionStorage.getItem('user')
-             axios.get("http://localhost:3000/api/auth/multer/posts/"+ userId, {
-            headers: {
-               Authorization: "Bearer " + sessionStorage.token,
-            },
-         })
-         .then((response)=>{ console.log(response) 
-         this.posts =response.data
-         this.message=''})
-         .catch(err => console.log(err)); 
-        }) 
-    }
-        
+            .then((response) => {
+              console.log(response);
+              this.posts = response.data;
+              this.message = "";
+            })
+            .catch((err) => console.log(err));
+        });
     },
-    
-    onFileSelect(event) {
-      console.log(event)
-    this.image= event.target.files[0]
-      
-    },
-
   },
-  
-}
-  
+};
 </script>
 
 
 <style scoped>
-
-.container{
-   font-family: 'Comic Sans MS', cursive ;
+.container {
+  font-family: "Comic Sans MS", cursive;
 }
-h1{
-    font-family: 'Comic Sans MS', cursive;
-   color: red;
+h1 {
+  font-family: "Comic Sans MS", cursive;
+  color: red;
 }
-.card{
-   border: 1px solid red;
-   box-shadow: 2px 3px 3px red;
-    background-color: rgb(218, 212, 212);;
+.card {
+  border: 1px solid red;
+  box-shadow: 2px 3px 3px red;
+  background-color: rgb(218, 212, 212);
 }
-.form{
-    margin-top: 30px;
-
+.form {
+  margin-top: 30px;
 }
 
-.form-control{
-    border-radius: 20px;
+.form-control {
+  border-radius: 20px;
 }
-.form-group{
-    margin-top:30px;
+.form-group {
+  margin-top: 30px;
 }
-label{
-    font-family: 'Comic Sans MS', cursive;
-    color:rgb(48, 48, 172)
+label {
+  font-family: "Comic Sans MS", cursive;
+  color: rgb(48, 48, 172);
 }
-.row{
-    margin-bottom: 50px;
-    margin-top: 50px;
-    background-color: rgb(216, 212, 206);
+.row {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  background-color: rgb(216, 212, 206);
 }
 .mgs {
   color: red;
 }
-
 </style> 
