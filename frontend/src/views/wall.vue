@@ -46,7 +46,7 @@ export default {
          (this.users = response.data))
          .catch((err) => console.log(err));
 
-     axios.get("http://localhost:3000/api/auth/posts", {
+     axios.get("http://localhost:3000/api/auth/multer/posts", {
              headers: {
                  Authorization: "Bearer " + sessionStorage.token,
              },

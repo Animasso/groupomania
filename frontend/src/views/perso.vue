@@ -14,6 +14,8 @@
                                 <textarea v-model="content" class="form-control" id="postMgs" rows="3" ></textarea>
                                  <div class="mgs">{{ message }}</div>
                             </div>
+                            <label for="file">Charger une image:</label>
+                            <input type="file" accept="image/*" @change="onFileSelect" >
                             <button class="btn btn-primary pull-right" type="text"  @click="postMessage()">Partager</button>
                         </div>
                     </div>
@@ -54,6 +56,7 @@ export default {
           createdAt:'',
           title:'',
           message: '',
+          image: null
      }
   },
    created(){
@@ -78,7 +81,7 @@ export default {
        
          .catch((err) => console.log(err));
 
-         axios.get("http://localhost:3000/api/auth/posts/"+ userId, {
+         axios.get("http://localhost:3000/api/auth/multer/posts/"+ userId, {
             headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
@@ -97,9 +100,12 @@ postMessage(){
     if (this.content==''|| this.title=='') {
         (this.message="Veuillez inscrire un sujet et un message")
     }else{
+        const fd = new FormData()
+        fd.append('image',this.image)
         axios
-        .post("http://localhost:3000/api/auth/posts/post",{content:this.content,title:this.title}, {
+        .post("http://localhost:3000/api/auth/multer/posts/post",fd,{content:this.content,title:this.title}, {
             headers: {
+                'content-type': 'multipart/form-data',
                   Authorization: "Bearer " + sessionStorage.token,
                },
             })
@@ -108,7 +114,7 @@ postMessage(){
             this.content = ''; 
             this.title = '';
             const userId= sessionStorage.getItem('user')
-             axios.get("http://localhost:3000/api/auth/posts/"+ userId, {
+             axios.get("http://localhost:3000/api/auth/multer/posts/"+ userId, {
             headers: {
                Authorization: "Bearer " + sessionStorage.token,
             },
@@ -122,7 +128,11 @@ postMessage(){
         
     },
     
-    
+    onFileSelect(event) {
+      console.log(event)
+    this.image= event.target.files[0]
+      
+    },
 
   },
   
