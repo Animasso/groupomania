@@ -82,6 +82,8 @@ exports.deleteUser = (req, res, next) => {
             .catch (error => res.status(500).json({ error }));
 };
 
+
+
 exports.getOneUser = (req, res, next) => {
     models.users.findOne
     ({ where: { id: req.params.id }})

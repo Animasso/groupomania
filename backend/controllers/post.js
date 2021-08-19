@@ -23,7 +23,7 @@ if (!req.file) {
         userId: userId,
         content: req.body.content,
         title: req.body.title,
-        imageUrl: "",
+        image: "",
     })
         .then((post) => res.status(201).json(post))
         .catch((error) => {console.log(error)
@@ -31,9 +31,10 @@ if (!req.file) {
 
     } else if (req.file) {
         models.posts.create({
-            ...req.body, 
-            UserId: userId,
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            userId: userId,
+            content: req.body.content,
+            title: req.body.title,
+            image: `${req.protocol}://${req.get("host")}/images/${
                 req.file.filename
             }`,
         })
@@ -41,29 +42,7 @@ if (!req.file) {
             .catch((error) => res.status(500).json(error));
     }
 };
-exports.modifyPost = (req, res, next) => {
 
-  try {
-      models.posts.findOne({
-          where: {
-              id: (req.params.id)
-          }
-      });
-      models.posts.update({
-          content: req.body.content
-      }, {
-          where: {
-              id: (req.params.id)
-          }
-      });
-
-      return res.status(200).send({
-          message: "Post modifiée"
-      })
-  } catch (err) {
-      return res.status(500).json(err);
-  }
-}
 
 exports.findAllPostUser= (req, res, next) => {
 

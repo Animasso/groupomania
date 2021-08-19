@@ -1,7 +1,8 @@
 const dbConfig = require("../config/db.config.js");
+require('dotenv').config();
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize('groupomania','root','Animasso1170', {
+const sequelize = new Sequelize(process.env.SQL_DATABASE_NAME,process.env.SQL_USER,process.env.SQL_PASSWORD, {
   host: 'localhost',
   dialect: 'mysql',
   logging: false,

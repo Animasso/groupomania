@@ -15,9 +15,6 @@ router.post('/post',postCtrl.createPost);
 //requete pour ciblé et afficher un element grace a son id
 router.get('/:userId',postCtrl.findAllPostUser);
 
-//requete pour modifier un objet existant
-router.put('/:id',multer,postCtrl.modifyPost );
-
 //requete pour supprimer un objet existant
 router.delete('/:id',postCtrl.deletePost );
 //requete pour recuperer tous les commentaire de chaque post
