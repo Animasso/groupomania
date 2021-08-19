@@ -12,7 +12,6 @@
     </div>
     <div class="titleCon">
       <p class="title">{{ post.title }}</p>
-      <img :src="post.image"  v-if="post.image" max-width="300px">
       <p class="content">{{ post.content }}</p>
     </div>
     <div class="mt-2 d-flex justify-content-end">
@@ -136,14 +135,15 @@ export default {
 
     deletePost(post) {
       axios
-        .delete("http://localhost:3000/api/auth/multer/posts/" + post.id, {
+        .delete("http://localhost:3000/api/auth/posts/" + post.id, {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token"),
           },
         })
         .then((response) => {
           console.log(response);
-          this.posts = this.posts.filter((post) => post.id != this.post.id);
+          this.posts = this.posts.filter((post) => post.id != this.post);
+           
           
         })
         .catch((err) => console.log(err));

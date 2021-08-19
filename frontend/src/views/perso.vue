@@ -19,8 +19,6 @@
                 ></textarea>
                 <div class="mgs">{{ message }}</div>
               </div>
-              <label for="file">Charger une image:</label>
-              <input type="file" accept="image/*" @change="onFileSelect" />
               <button
                 class="btn btn-primary pull-right"
                 type="text"
@@ -91,7 +89,7 @@ export default {
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:3000/api/auth/multer/posts/" + userId, {
+      .get("http://localhost:3000/api/auth/posts/" + userId, {
         headers: {
           Authorization: "Bearer " + sessionStorage.token,
         },
@@ -107,7 +105,7 @@ export default {
     postMessage() {
       axios
         .post(
-          "http://localhost:3000/api/auth/multer/posts/post",
+          "http://localhost:3000/api/auth/posts/post",
           { content: this.content, title: this.title },
           {
             headers: {
@@ -121,7 +119,7 @@ export default {
           this.title = "";
           const userId = sessionStorage.getItem("user");
           axios
-            .get("http://localhost:3000/api/auth/multer/posts/" + userId, {
+            .get("http://localhost:3000/api/auth/posts/" + userId, {
               headers: {
                 Authorization: "Bearer " + sessionStorage.token,
               },

@@ -72,7 +72,7 @@ body {
     background-color: #eee;
 }
 .card {
-    background-color: #6c57e2;
+    background-color: #d0cde2;
     width: 350px;
     border-radius: 20px;
     -webkit-transform: scale(1);
@@ -95,6 +95,7 @@ h1{
     justify-content: center;
     color: #f11f1f;
     font-family: 'Comic Sans MS', cursive;
+    margin-left: 10px;
 }
 .line-color {
     color: rgb(224, 17, 17);
