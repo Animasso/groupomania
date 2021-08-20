@@ -56,16 +56,16 @@ export default {
          .catch((err) => console.log(err));
    },
   methods:{
-       deletePost(post) {
+       deletePost(item) {
       axios
-        .delete("http://localhost:3000/api/auth/posts/" +post.id, {
+        .delete("http://localhost:3000/api/auth/posts/" + item.id, {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token"),
           },
         })
         .then((response) => {
           console.log(response);
-          this.posts = this.posts.filter((post) => post.id != this.post.id);
+          this.posts = this.posts.filter((post) => post.id != item.id);
           
         })
         .catch((err) => console.log(err));

@@ -134,7 +134,7 @@ export default {
     },
     deletePost(item) {
       axios
-        .delete("http://localhost:3000/api/auth/posts/" +post.id, {
+        .delete("http://localhost:3000/api/auth/posts/" +item.id, {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token"),
           },
