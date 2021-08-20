@@ -132,7 +132,7 @@ export default {
             .catch((err) => console.log(err));
         });
     },
-    deletePost(post) {
+    deletePost(item) {
       axios
         .delete("http://localhost:3000/api/auth/posts/" +post.id, {
           headers: {
@@ -141,7 +141,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.posts = this.posts.filter((post) => post.id != this.post.id);
+          this.posts = this.posts.filter((post) => post.id != item.id);
           
         })
         .catch((err) => console.log(err));
