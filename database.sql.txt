@@ -14,15 +14,14 @@ CREATE TABLE `users` (
 CREATE TABLE `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `userId` int DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `posts_ibfk_1` (`userId`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `comments` (
@@ -33,8 +32,8 @@ CREATE TABLE `comments` (
   `postId` int DEFAULT NULL,
   `userId` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `comments_ibfk_41` (`postId`),
-  KEY `comments_ibfk_42` (`userId`),
-  CONSTRAINT `comments_ibfk_41` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `comments_ibfk_42` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `comments_ibfk_247` (`postId`),
+  KEY `comments_ibfk_248` (`userId`),
+  CONSTRAINT `comments_ibfk_247` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comments_ibfk_248` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
