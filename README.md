@@ -20,4 +20,4 @@ Ajouter le fichier .env dans le dossier backend/, avec les variables :
 1. Ouvrir un nouveau terminal
 2. cd frontend  Aller dans le dossier "frontend"
 3. npm install Installer les dépendances
-4. npm run serve lancer le frontend
+4. npm run serve lancer le frontend 
