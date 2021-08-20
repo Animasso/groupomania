@@ -5,7 +5,7 @@
                         
             <div class="card p-3 border-blue mt-3"> 
                 <div id="card">
-                <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+                <Post v-for="post in posts" v-bind:key="post.id" :post="post" @deletePostEvent="deletePost" />
                 
                 </div>
             </div>
@@ -55,7 +55,22 @@ export default {
          this.posts= response.data})
          .catch((err) => console.log(err));
    },
-  
+  methods:{
+       deletePost(post) {
+      axios
+        .delete("http://localhost:3000/api/auth/posts/" +post.id, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          this.posts = this.posts.filter((post) => post.id != this.post.id);
+          
+        })
+        .catch((err) => console.log(err));
+    },
+  }
 }
 
 

@@ -18,7 +18,7 @@
       <button
         class="btn btn-primary btn-sm ms-1"
         v-if="post.userId === user.id || user.admin === true"
-        @click.prevent="deletePost(post)"
+        @click="deletePostEvent"
       >
         Supprimer
       </button>
@@ -88,7 +88,8 @@ export default {
       message: "",
       image: null,
       content:'',
-      posts:[]
+      posts:[],
+      
     };
   },
   props: {
@@ -133,20 +134,8 @@ export default {
       });
     },
 
-    deletePost(post) {
-      axios
-        .delete("http://localhost:3000/api/auth/posts/" + post.id, {
-          headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("token"),
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          this.posts = this.posts.filter((post) => post.id != this.post);
-           
-          
-        })
-        .catch((err) => console.log(err));
+    deletePostEvent() {
+      this.$emit("deletePostEvent", "this.post");
     },
 
     createCom(post) {
