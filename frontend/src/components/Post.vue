@@ -135,7 +135,7 @@ export default {
     },
 
     deletePostEvent() {
-      this.$emit("deletePostEvent", "this.post");
+      this.$emit("deletePostEvent", this.post);
     },
 
     createCom(post) {

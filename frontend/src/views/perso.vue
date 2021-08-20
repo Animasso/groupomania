@@ -34,7 +34,7 @@
 
     <div class="card row-8 p-3 border-blue mt-3">
       <div id="card">
-        <Post v-for="post in posts" v-bind:key="post.id" :post="post" @deletePostEvent="deletePost(post)"/>
+        <Post v-for="post in posts" v-bind:key="post.id" :post="post" @deletePostEvent="deletePost"/>
       </div>
     </div>
   </div>
