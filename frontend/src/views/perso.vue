@@ -62,7 +62,6 @@ export default {
       createdAt: "",
       title: "",
       message: "",
-      image: null,
     };
   },
   created() {
@@ -76,18 +75,7 @@ export default {
       .then((response) => (this.user = response.data))
       .catch((err) => console.log(err));
 
-    axios
-      .get("http://localhost:3000/api/users", {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.token,
-        },
-      })
-      .then((response) => {
-        console.log(response), (this.users = response.data);
-      })
-
-      .catch((err) => console.log(err));
-
+    
     axios
       .get("http://localhost:3000/api/auth/posts/" + userId, {
         headers: {
@@ -103,6 +91,9 @@ export default {
 
   methods: {
     postMessage() {
+    if (this.content==''|| this.title=='') {
+        (this.message="Veuillez inscrire un sujet et un message")
+    }else{
       axios
         .post(
           "http://localhost:3000/api/auth/posts/post",
@@ -131,6 +122,7 @@ export default {
             })
             .catch((err) => console.log(err));
         });
+    }
     },
     deletePost(item) {
       axios
@@ -149,9 +141,17 @@ export default {
   },
 };
 </script>
+<style>
+#app{
+  background-color: #d1d1eb;
+}
+</style>
 
 
 <style scoped>
+body{
+   BACKGROUND-COLOR: rgb(218, 214, 210);
+}
 .container {
   font-family: "Comic Sans MS", cursive;
 }

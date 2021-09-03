@@ -180,7 +180,7 @@ export default {
           })
           .catch(() => {
             {
-              this.emessage =`"votre mot de passe doit contenir min 8 caractère"
+              this.emessage =`"Votre mot de passe doit contenir min 8 caractères"
                               "1 maj et 2 chiffres"` ;
             }
           });
@@ -192,9 +192,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#app{
+  background-color:  none !important  ;
+}
 
+.container{
+  DISPLAY: FLEX;
+    FLEX-DIRECTION: COLUMN;
+    JUSTIFY-CONTENT: CENTER;
+    ALIGN-CONTENT: CENTER;
+    ALIGN-ITEMS: CENTER;
+}
 h1 {
   font-size: larger;
+  margin-top: 10px;
+  color: red
 }
 .form-floating {
   width: 300px;
@@ -213,9 +225,17 @@ img {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  
 }
 fieldset {
   margin-bottom: 100px;
+  DISPLAY: FLEX;
+  FLEX-DIRECTION: COLUMN;
+  border-radius: 50PX;
+  BACKGROUND-COLOR: blanchedalmond;
+  box-shadow: 2px 3px 3px red;
 }
 .form-control {
   margin-top: 10px;

@@ -29,7 +29,6 @@ export default {
       return{
           users:[],
           posts:[],
-        
           comments:[],
         
         

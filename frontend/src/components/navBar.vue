@@ -1,6 +1,6 @@
 <template>
 <nav class="row-12  navbar navbar-expand-lg navbar mx-3 ">
-            <div class="navbar-brand"><img src="../assets/icon-title.png" alt="titre"></div>
+            <div class="navbar-brand"><img src="../assets/icon-title.jpg" alt="titre"></div>
             
             <div class="collapse navbar-collapse d-flex" id="navbarNav">
               <ul class="navbar-nav">
@@ -45,6 +45,7 @@ export default {
 
 .navbar-brand img{
         width: 100px;
+        margin-left: 0em;
     }
 
 .nav-item{
@@ -63,5 +64,9 @@ export default {
 .nav-link{
   font-family: 'Comic Sans MS', cursive;
   color: rgb(12, 12, 161);
+}
+.navbar{
+    WIDTH: 100%;
+    MARGIN-BOTTOM: 40PX;
 }
 </style>

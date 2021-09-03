@@ -91,8 +91,9 @@ methods:{
 #app{
    font-family
    :Comic Sans MS, cursive;
- 
+  background-color: #cccce2;
 }
+
 body {
     background-color: #eee;
 

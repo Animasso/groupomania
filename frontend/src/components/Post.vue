@@ -86,7 +86,6 @@ export default {
       lastName: "",
       title: "",
       message: "",
-      image: null,
       content:'',
       posts:[],
       
